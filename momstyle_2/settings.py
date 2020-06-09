@@ -13,7 +13,7 @@ SECRET_KEY = '&m1fn6&5zq$b1f+r(nl!hqq_-74jxl6@u)a*8y#+cm(%@t95z&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['momstyle.ru', 'www.momstyle.ru']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'momstyle',
-        'USER': 'momstyle_user',
-        'PASSWORD': 'dP7hqXvnZKXR7FdxYfzY',
+        'USER': 'developer',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -120,7 +120,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = ''
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
