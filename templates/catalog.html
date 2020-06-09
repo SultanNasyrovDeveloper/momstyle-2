@@ -56,7 +56,12 @@
                                 <!-- product caption container -->
 
                                 <span class="product-name">{{ product.name }}</span>
-                                <span class="product-price">{{ product.price }} руб.</span>
+                                <div class="product-price-container">
+                                    {% if product.prev_price %}
+                                        <span class="product-price product-prev-price">{{ product.prev_price }} руб.</span>
+                                    {% endif %}
+                                    <span class="product-price">{{ product.price }} руб.</span>
+                                </div>
                             </div><!-- end product caption container -->
                         </a>
                     </div><!-- end product instance -->
