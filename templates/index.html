@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block meta %}
+    <title>{{ page_seo.title }}</title>
+    <meta name="description" content="{{ page_seo.description }}">
+    <meta name="keywords" content="{{ page_seo.keywords }}">
+
+    {{ page_seo.additional|safe }}
+
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <!-- slide css -->
+    <link rel="stylesheet" href="{% static 'plugins/slide/jquery.slide.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="banner">
+        <!-- banner section -->
+
+        <div class="images-container slide">
+            <!-- banner images container -->
+
+            <ul>
+                {% for banner in banners %}
+                    <li data-bg="{{ banner.image.url }}"></li>
+                {% endfor %}
+
+            </ul>
+
+        </div><!-- end banner images container -->
+
+
+        <div class="banner-caption">
+            <!-- banner caption container -->
+
+            <div class="taglines-container">
+                <!-- container for banner taglines -->
+
+                <h1 class="main-tag">{{ seo.index_h1 }}</h1>
+                <h2 class="second-tag">Будь красива в любом положении</h2>
+
+                <div class="decorative-text">
+                    <!-- decorative text container -->
+                    <span>MOMSTYLE</span>
+                </div><!-- end decorative text container -->
+
+            </div><!-- end container for banner taglines -->
+
+        </div><!-- end banner caption container -->
+
+    </section><!-- end banner section -->
+
+
+
+    <section class="products">
+        <!-- products section -->
+
+        <div class="section-header-container">
+            <!-- products block header -->
+
+            <h2 class="section-header">{{ main.product_h2 }}</h2>
+            <p class="header-par">{{ main.product_par }}</p>
+        </div><!-- end products block header -->
+
+
+        <div class="products-container">
+            <!-- products container -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    {% for product in products %}
+                        <div class="product col-12 col-sm-4 col-md-2">
+                            <!-- product instance -->
+
+                            <a class="detail-link" href="{{ product.get_absolute_url }}">
+                                <div class="image-container">
+                                <!-- product-image-container -->
+
+                                    <img class="img-fluid main-img" src="{{ product.images.first.image_mini.url }}" alt="">
+                                    <div class="image-caption">
+                                        <!-- image caption container -->
+
+                                        <span>Смотреть >></span>
+                                    </div><!-- end image caption container -->
+                                </div><!-- end product-image-container -->
+
+                                <div class="product-caption">
+                                    <!-- product caption container -->
+
+                                    <span class="product-name">{{ product.name }}</span>
+                                    <div class="product-price-container">
+                                        {% if product.prev_price %}
+                                            <span class="product-price product-prev-price">{{ product.prev_price }} руб.</span>
+                                        {% endif %}
+                                        <span class="product-price">{{ product.price }} руб.</span>
+                                    </div>
+
+                                </div><!-- end product caption container -->
+                            </a>
+
+                        </div><!-- end product instance -->
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+
+        </div><!-- end products container -->
+
+
+        <div class="catalog-btn-container">
+            <!-- catalog button container -->
+
+            <a class="catalog-btn" href="{% url 'catalog' 'all' %}">Все товары</a>
+        </div><!-- end catalog button container -->
+
+    </section><!-- end products section -->
+
+
+    <section class="categories">
+        <!-- categories section -->
+
+        <div class="section-header-container">
+            <!-- block header container -->
+
+            <h2 class="section-header">{{ main.category_h2 }}</h2>
+            <p class="header-par">{{ main.category_par }}</p>
+        </div><!-- end block header container -->
+
+
+        <div class="categories-container">
+            <!-- categories container -->
+
+        <div class="container-fluid">
+            <div class="row">
+                {% for category in categories %}
+                    <div class="category col-12 col-sm-6 col-md-3">
+                        <!-- category instance -->
+
+                        <a href="{% url 'catalog' category.id %}" class="detail-link">
+                            <div class="image-container">
+                            <!-- image container -->
+
+                                <img class="img-fluid main-img" src="{{ category.image.url }}" alt="">
+                                <div class="image-caption">
+                                    <!-- image caption container -->
+
+                                    <span>Перейти >></span>
+                                </div><!-- end image caption container -->
+                            </div><!-- end image container -->
+
+
+                            <div class="category-caption">
+                                <!-- category caption container -->
+
+                                <span class="category-name">{{ category.name }}</span>
+                            </div><!-- end category caption container -->
+                        </a>
+
+                    </div><!-- end category instance -->
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+
+        </div><!-- end categories container -->
+
+    </section><!-- end categories section -->
+
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'plugins/slide/jquery.slide.min.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block meta %}
+    <title>{{ page_seo.title }}</title>
+    <meta name="description" content="{{ page_seo.description }}">
+    <meta name="keywords" content="{{ page_seo.keywords }}">
+
+    {{ page_seo.additional|safe }}
+
+{% endblock %}
+
+
+{% block css %}
+    <!-- delivery.css -->
+    <link rel="stylesheet" href="{% static 'css/delivery.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <section class="page-header">
+        <!-- page header -->
+
+        <div class="image-container">
+            <!-- image container -->
+
+            {% if main.delivery_header_image %}
+                <img class="img-fluid" src="{{ main.delivery_header_image.url }}" alt="">
+            {% endif %}
+
+
+        </div><!-- end image container -->
+
+        <div class="page-header-caption">
+            <!-- page header caption -->
+
+            <h1>{{ seo.delivery_h1 }}</h1>
+        </div><!-- end page header caption -->
+    </section><!-- end page header -->
+
+
+    <section class="delivery-info info-section">
+        <!-- delivery info container -->
+        <div class="section-header">
+            <h2>О доставке</h2>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                {% for obj in info %}
+                    {% if obj.type == 'd' %}
+                        <div class="info col-12 col-sm-6 col-md-4">
+                            <img src="{{ obj.image.url }}" alt="">
+                            <span>{{ obj.title }}</span>
+                            <p>{{ obj.description }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </section><!-- end delivery info container -->
+
+
+    <section class="payment-info info-section">
+        <div class="section-header">
+            <h2>Об оплате</h2>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                {% for obj in info %}
+                    {% if obj.type == 'p' %}
+                        <div class="info col-12 col-sm-6 col-md-4">
+                            <img src="{{ obj.image.url }}" alt="">
+                            <span>{{ obj.title }}</span>
+                            <p>{{ obj.description }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+    </section>
+
+{% endblock %}
+
+
+{% block script %}
+    <!-- delivery.js -->
+    <script src="{% static 'js/delivery.js' %}"></script>
+{% endblock %}

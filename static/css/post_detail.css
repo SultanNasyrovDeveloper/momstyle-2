@@ -1,0 +1,158 @@
+.page-header{
+    position: relative;
+
+    height: 400px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: grey;
+    color: white;
+}
+
+.image-container{
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.header-image{
+
+}
+
+.page-header-caption{
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.21);
+}
+
+.like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.like img{
+    height: 64px;
+}
+
+.page-header-caption h1{
+    font-family: 'Bebas bold', sans-serif;
+    font-size: 5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.045rem;
+}
+
+.info-section{
+    padding: 3rem 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text{
+    padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.paragraph .subtitle{
+    display: flex;
+    justify-content: center;
+
+    font-family: 'Main narrow', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.045rem;
+    line-height: 3rem;
+
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.paragraph p{
+    font-family: 'Main light', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.ext{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.ext span{
+    font-family: 'Main light', sans-serif;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Main light', sans-serif;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.like img{
+    height: 16px;
+    margin-right: 0.1rem;
+}
+
+@media (max-width: 900px){
+    .page-header-caption h1{
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 600px){
+    .page-header{
+        height: 300px;
+    }
+
+    .page-header-caption h1{
+        font-size: 2.5rem;
+    }
+
+    .text{
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 430px){
+    .page-header{
+        height: 200px;
+    }
+
+    .page-header-caption h1{
+        font-size: 1.5rem;
+    }
+}
+

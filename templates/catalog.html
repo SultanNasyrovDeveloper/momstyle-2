@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block meta %}
+    <title>{{ page_seo.title }}</title>
+    <meta name="description" content="{{ page_seo.description }}">
+    <meta name="keywords" content="{{ page_seo.keywords }}">
+
+    {{ page_seo.additional|safe }}
+
+{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="products-section">
+    <!-- products section -->
+
+    <div class="categories-toolbar">
+        <!-- categories toolbar -->
+            <a class="category-link all-products" href="{% url 'catalog' 'all' %}">Все товары</a>
+        {% for category in categories %}
+            <a class="category-link" href="{% url 'catalog' category.id %}">{{ category.name }}</a>
+        {% endfor %}
+
+    </div><!-- end categories toolbar -->
+
+
+    <div class="products-container">
+        <!-- products container -->
+
+        <div class="container-fluid">
+            <div class="row">
+                {% for product in products %}
+                    <div class="product col-6 col-sm-4 col-md-3 col-xl-2 pl-1 pr-1 pt-0 pb-0 mt-3 mb-3">
+                        <!-- product instance -->
+                        <a class="detail-link" href="{{ product.get_absolute_url }}">
+                            <div class="image-container">
+                                <!-- product-image-container -->
+
+                                <img class="img-fluid main-img" src="{{ product.images.first.image_mini.url }}" alt="">
+                                <div class="image-caption">
+                                    <!-- image caption container -->
+
+                                    <span>Смотреть >></span>
+                                </div><!-- end image caption container -->
+                            </div><!-- end product-image-container -->
+
+                            <div class="product-caption">
+                                <!-- product caption container -->
+
+                                <span class="product-name">{{ product.name }}</span>
+                                <span class="product-price">{{ product.price }} руб.</span>
+                            </div><!-- end product caption container -->
+                        </a>
+                    </div><!-- end product instance -->
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+    </div><!-- end products container -->
+</section><!-- end products section -->
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/catalog.js' %}"></script>
+{% endblock %}

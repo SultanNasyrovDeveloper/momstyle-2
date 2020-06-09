@@ -1,0 +1,375 @@
+.navigation{
+    background-color: #7d7d7d;
+}
+
+.product-detail{
+    padding: 0 3rem;
+    margin: 4rem 0;
+
+    width: 100vw;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 1rem;
+}
+
+
+/*images*/
+
+.images-column{
+    position: relative;
+    grid-column: span 5;
+}
+
+.sp-wrap{
+    max-width: 500px !important;
+}
+
+
+/*description*/
+
+.description-column{
+    grid-column: span 7;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.category, .category:hover{
+    font-family: "Main light", sans-serif;
+    font-size: 0.8rem;
+
+    color: rgba(0, 0, 0, 0.41);
+}
+
+.name{
+    font-family: 'Bebas bold', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 0.045rem;
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, 0.61);
+}
+
+.help-text{
+    font-family: 'Main narrow', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.04rem;
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, 0.41);
+}
+
+.material, .model-height{
+    font-family: 'Main light', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.04rem;
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.order-tools-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.price-container{
+    margin: 1rem 0;
+}
+
+.current-price{
+    font-family: 'Main narrow', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.045rem;
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.prev-price{
+    font-family: 'Main narrow', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.045rem;
+    text-transform: uppercase;
+    text-decoration: line-through;
+
+    color: rgba(0, 0, 0, 0.4);
+
+}
+
+.make-order{
+    display: flex;
+}
+
+.size-buttons{
+    display: flex;
+}
+
+.chosen{
+    background-color: rgba(31, 200, 138, 0.65) !important;
+}
+
+.size{
+    margin-right: 0.5rem;
+    height: 3rem;
+    width: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    border-radius: 3px;
+    border: none;
+
+    font-family: 'Main narrow', sans-serif;
+
+    background-color: rgba(0, 0, 0, 0.11);
+    color: rgba(0, 0, 0, 0.61);
+}
+
+#quantity-select{
+    height: 3rem;
+    width: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 3px;
+
+    font-family: 'Main light', sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sizes-table-link{
+    font-family: 'Main light', sans-serif;
+    font-size: 0.8rem;
+    text-transform: lowercase;
+
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.add-item, .add-item:hover{
+    margin: 2rem 0;
+    padding: 0.5rem 1rem;
+
+    width: 11rem;
+    height: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Main narrow', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+
+    border-radius: 3px;
+
+    background-color: rgba(0, 0, 0, 0.61);
+    color: white;
+}
+
+.description{
+    display: block;
+    max-width: 30rem;
+
+    font-family: 'Main light', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.suggestions-section{
+    display: flex;
+    flex-direction: column;
+}
+
+.section-header{
+    padding: 1rem 3rem;
+}
+
+.section-header h2{
+    font-family: 'Bebas book', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.045rem;
+
+    color: rgba(0, 0, 0, 0.61);
+}
+
+.suggestions{
+    padding: 1rem 3rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    grid-gap: 1rem;
+}
+
+.product{
+    position: relative;
+
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-link, .detail-link:hover{
+    text-decoration: none;
+}
+
+
+.image-container{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.image-caption{
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    z-index: 10;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.image-caption span{
+    font-family: "Main light", sans-serif;
+    font-size: 0.8rem;
+
+    color: white;
+}
+
+.product-caption{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name{
+    font-family: 'Main narrow', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    line-height: 2rem;
+
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.product-price{
+    font-family: 'Main light', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.sizes-table-layout{
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+
+    display: none;
+    
+    z-index: 160;
+
+    background-color: black;
+}
+
+.sizes-content-container{
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    z-index: 200;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close, .close:hover{
+    position: absolute;
+    top: 1rem; right: 3rem;
+
+    color: #cdcdcd;
+}
+
+.table-image{
+    width: 70%;
+    height: 80%;
+
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .images-column{
+        grid-column: span 5;
+    }
+
+    .description-column{
+        grid-column: span 7;
+    }
+}
+
+@media (max-width: 750px) {
+    .images-column{
+        grid-column: span 6;
+    }
+
+    .description-column{
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-detail{
+        display: flex;
+        flex-direction: column;
+
+        padding: 1rem;
+    }
+    .images-column{
+        grid-column: span 6;
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+    }
+
+    .description-column{
+        grid-column: span 6;
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+    }
+
+    .section-header{
+        padding: 1rem;
+    }
+
+    .suggestions{
+        padding: 1rem;
+    }
+}
+
+
+
+
+
+
+

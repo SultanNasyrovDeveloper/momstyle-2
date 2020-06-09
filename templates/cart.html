@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block meta %}
+    <title>{{ page_seo.title }}</title>
+    <meta name="description" content="{{ page_seo.description }}">
+    <meta name="keywords" content="{{ page_seo.keywords }}">
+
+    {{ page_seo.additional|safe }}
+
+{% endblock %}
+
+
+{% block css %}
+    <!-- cart.css -->
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="header">
+        <!-- page header section -->
+
+        <h1>{{ seo.cart_h1 }}</h1>
+
+        <a href="{% url 'clean' %}" class="clean">Очистить</a>
+    </section><!-- end page header section -->
+
+
+    <section class="cart">
+        <!-- cart items section -->
+
+        <div class="cart-items-container">
+            <!-- cart items container -->
+
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    <!-- cart item instance -->
+
+                    <a href="{% url 'product_detail' item.id %}" class="name">{{ item.name }}</a>
+
+                    <span class="size">{{ item.size }}</span>
+
+                    <span class="help-text price-text">
+                        <span class="price">{{ item.price }}</span> руб.
+                    </span>
+
+                    <select change-url="{% url 'change-quantity' %}" name="quantity-select" class="quantity-select" value="{{ item.quantity }}">
+                        <option value="1" class="quantity-option">1</option>
+                        <option value="2" class="quantity-option">2</option>
+                        <option value="3" class="quantity-option">3</option>
+                        <option value="4" class="quantity-option">4</option>
+                        <option value="5" class="quantity-option">5</option>
+                        <option value="6" class="quantity-option">6</option>
+                        <option value="7" class="quantity-option">7</option>
+                        <option value="8" class="quantity-option">8</option>
+                        <option value="9" class="quantity-option">9</option>
+                        <option value="10" class="quantity-option">10</option>
+                    </select>
+
+                    <span class="help-text subtotal-text">
+                        <span class="subtotal">{{ item.subtotal }}</span> руб.
+                    </span>
+
+                    <a item-key="{{ item.cart_name }}" class="delete-item" href="{% url 'delete-item' %}">удалить</a>
+                </div><!-- end cart item instance -->
+            {% empty %}
+                <div class="empty-cart">
+                    <!-- empty cart container -->
+
+                    <span>Корзина пуста...</span>
+                    <a href="{% url 'catalog' 'all' %}">Перейти в каталог</a>
+                </div><!-- end empty cart container -->
+            {% endfor %}
+
+        </div><!-- end cart items container -->
+
+
+        <div class="cart-info">
+            <!-- cart info container -->
+
+            <span class="total-help-text">
+                <span class="total">{{ total }}</span> руб.
+            </span>
+            <a class="open-order-form" href="#">Оформить заказ</a>
+
+        </div><!-- end cart indo container -->
+
+    </section><!-- end cart items section -->
+
+    <div class="order-form-layout">
+        <!-- order form layout -->
+
+        <span class="close">x</span>
+
+        <div class="order-form">
+            <!-- order form container -->
+
+            <span class="form-title">Оформить заказ</span>
+
+            <input type="text" class="name-input" placeholder="Ваше имя..." required>
+            <input type="text" class="phone-input" placeholder="Ваш номер..." required>
+
+            <a href="{% url 'make-order' %}" class="make-order" onclick="ym(56194840, 'reachGoal', 'zakaz'); return true;">Отправить</a>
+
+        </div><!-- end order form container -->
+
+    </div><!-- end order form layout -->
+
+
+
+{% endblock %}
+
+
+{% block script %}
+    <!-- cart.js -->
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block meta %}
+    <title>{{ page_seo.title }}</title>
+    <meta name="description" content="{{ page_seo.description }}">
+    <meta name="keywords" content="{{ page_seo.keywords }}">
+
+    {{ page_seo.additional|safe }}
+
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="page-header">
+        <!-- page header -->
+
+        <div class="image-container">
+            <!-- image container -->
+            {% if main.about_header_image %}
+                <img class="header-image" src="{{ main.about_header_image.url }}" alt="">
+            {% endif %}
+        </div><!-- end image container -->
+
+        <div class="page-header-caption">
+            <!-- page header caption -->
+
+            <h1>{{ seo.about_h1 }}</h1>
+        </div><!-- end page header caption -->
+
+    </section><!-- end page header -->
+
+
+    <section class="posts">
+        {% for post in posts %}
+            <div class="post">
+
+                <a href="{{ post.get_absolute_url }}">
+
+                    <div class="image-container">
+                        <!-- post-image-container -->
+
+                            <img class="img-fluid main-img" src="{{ post.image.url }}" alt="">
+                            <div class="image-caption">
+                                <!-- image caption container -->
+
+                                <span>Читать >></span>
+                            </div><!-- end image caption container -->
+
+                    </div><!-- end product-image-container -->
+
+                    <div class="post-caption">
+                        <span class="name">{{ post.title }}</span>
+
+                        <p class="short-par">{{ post.paragraphs.all.first.text }}</p>
+
+                        <div class="ext">
+                            <span>{{ post.creation_date }}</span>
+                            <a href="{% url 'like' %}" class="like" post-id="{{ post.id }}">
+                                <img src="{{ icons.like.url }}" alt="">
+                                <span class="likes-number">{{ post.likes_number }}</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </a>
+
+            </div>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
+
+
+
+{% block script %}
+    <!-- about.js -->
+    <script src="{% static 'js/about.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    {% block meta %}
+
+    {% endblock %}
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(56194840, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+    <!-- base.css -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- bootstrap 4 css -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon/styles.min.css' %}">
+
+
+
+    <style>
+        {# h1 font #}
+        @font-face {
+            font-family: 'Bebas bold';
+            src: url({% static 'fonts/BebasNeue Bold.otf' %});
+        }
+        {# h2 font #}
+        @font-face {
+            font-family: 'Bebas book';
+            src: url({% static 'fonts/BebasNeue Book.otf' %});
+        }
+        {# main font #}
+        @font-face {
+            font-family: 'Main narrow';
+            src: url({% static 'fonts/PTN77F_W.woff' %});
+        }
+        {# paragraph font #}
+        @font-face {
+            font-family: 'Main light';
+            src: url({% static 'fonts/PTN57F_W.woff' %});
+        }
+    </style>
+
+    {% block css %}
+
+
+    {% endblock %}
+</head>
+
+
+<body>
+
+<section class="navigation">
+    <!-- navigation panel -->
+
+    <div class="logo-container">
+        <!-- brand -->
+        <a href="{% url 'index' %}">
+            {% if main.logo %}
+                <img class="brand" src="{{ main.logo.url }}" alt="Логотип сайта Momstyle shop">
+            {% else %}
+                Momstyle
+            {% endif %}
+
+        </a>
+    </div><!-- end brand -->
+
+
+    <div class="toggle-content">
+        <!-- containet for toggle content -->
+
+        <span class="close-toggle">x</span>
+
+        <div class="page-links">
+        <!-- page links container -->
+            <a href="{% url 'index' %}" class="navigation-link">Главная</a>
+            <a href="{% url 'catalog' 'all' %}" class="navigation-link">Каталог</a>
+            <a href="{% url 'delivery' %}" class="navigation-link">Доставка</a>
+            <a href="{% url 'blog' %}" class="navigation-link">О нас</a>
+        </div><!-- end page links container -->
+
+        <div class="cart-link-container">
+            <!-- car links container -->
+
+            <!-- cart icon -->
+            <a href="{% url 'cart' %}">
+                <i class="icon-cart text-white" style="font-size: 20px;"></i>
+                <span class="cart-items-number">{{ cart_items_number }}</span>
+            </a>
+
+        </div><!-- end car links container -->
+
+    </div><!-- containet for toggle content -->
+
+
+    <div class="toggle-btn">
+        <!-- toggle button contaioner -->
+        <img class="burger" src="{{ icons.burger.url }}" alt="">
+    </div><!-- toggle button contaioner -->
+
+
+</section><!-- end navigation panel -->
+
+
+{% block content %}
+
+{% endblock %}
+
+
+<section class="footer">
+        <!-- footer section -->
+
+        <div class="contacts-column">
+            <!-- contacts columns container -->
+
+            <span class="column-header">Контакты:</span>
+
+            <div class="contact-line">
+                <!-- phone line -->
+
+                <i class="icon-iphone"></i>
+                {{ main.phone_number }}
+            </div><!-- end phone line -->
+
+
+            <div class="contact-line">
+                <!-- email line -->
+
+                <i class="icon-envelop4"></i>
+                {{ main.email }}
+            </div><!-- end phone line -->
+
+
+            <div class="contact-line">
+                <!-- address line -->
+
+                <i class="icon-location3"></i>
+                {{ main.address }}
+            </div><!-- end phone line -->
+
+
+            <div class="contact-line">
+                <!-- working hours line -->
+
+                <i class="icon-watch2"></i>
+                {{ main.working_hours }}
+            </div><!-- end phone line -->
+
+        </div><!-- end contacts columns container -->
+
+
+        <div class="links-column">
+            <!-- links column container -->
+
+            <span class="column-header">Ссылки:</span>
+
+            <a href="{% url 'index' %}" class="footer-link">- Главная</a>
+            <a href="{% url 'catalog' 'all' %}" class="footer-link">- Каталог</a>
+            <a href="{% url 'delivery' %}" class="footer-link">- Доставка</a>
+            <a href="{% url 'blog' %}" class="footer-link">- О нас</a>
+
+        </div><!-- end links column container -->
+
+
+        <div class="contact-us-column">
+            <!-- contact us column -->
+
+            <span class="column-header">Связаться с нами:</span>
+
+            <form action="{% url 'contact-us' %}" class="contact-us">
+                <input type="text" class="contact-name" placeholder="Ваше имя" required>
+                <input type="text" class="contact-phone" placeholder="+7 (900) 000-0000" required>
+                <button type="submit" class="contact-us-btn">Отправить</button>
+            </form>
+
+        </div><!-- end contact us column -->
+    
+    
+        <div class="up-btn-container">
+            <!-- up button container -->
+            
+            <div class="up">
+                <!-- up button -->
+
+                <i class="icon-circle-up2 icon-2x"></i>
+            </div><!-- end up button -->
+
+        </div><!-- end up button container -->
+
+    </section><!-- end footer section -->
+
+
+
+<!-- jquery -->
+<script src="{% static 'plugins/jquery.js' %}"></script>
+<!-- TweenMax -->
+<script src="{% static 'plugins/gsap/TweenMax.min.js' %}"></script>
+<!-- gsap scroll to plugin -->
+<script src="{% static 'plugins/gsap/plugins/ScrollToPlugin.min.js' %}"></script>
+<!-- ajax setup -->
+<script src="{% static 'js/ajax_setup.js' %}"></script>
+<!-- input mask plugin -->
+<script src="{% static 'plugins/masked input/jquery.maskedinput.js' %}"></script>
+<!-- base.js -->
+<script src="{% static 'js/base.js' %}"></script>
+
+{% block script %}
+
+{% endblock %}
+
+
+</body>
+</html>

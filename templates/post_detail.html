@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block meta %}
+    <title>{{ post.name }} - {{ seo.post_title }}</title>
+    <meta name="description" content="{{ seo.post_description }}">
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+        <section class="page-header">
+        <!-- page header -->
+
+        <div class="image-container">
+            <!-- image container -->
+
+            <img class="img-fluid" src="{{ post.image.url }}" alt="">
+
+        </div><!-- end image container -->
+
+        <div class="page-header-caption">
+            <!-- page header caption -->
+
+            <h1>{{ post.title }}</h1>
+
+        </div><!-- end page header caption -->
+    </section><!-- end page header -->
+
+    <section class="text">
+        {% for paragraph in post.paragraphs.all %}
+            <div class="paragraph">
+
+                <div class="subtitle">
+                    <h2>{{ paragraph.title }}</h2>
+                </div>
+
+                <div class="par">
+                    <p>{{ paragraph.text }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="ext">
+            <span>{{ post.creation_date }}</span>
+            <a href="{% url 'like' %}" class="like" post-id="{{ post.id }}">
+                <img src="{{ icons.like.url }}" alt="">
+                <span class="likes-number">{{ post.likes_number }}</span>
+            </a>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/post_detail.js' %}"></script>
+{% endblock %}

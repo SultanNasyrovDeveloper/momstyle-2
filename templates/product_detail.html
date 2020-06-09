@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block meta %}
+    <title>{{ target.name }} - {{ page_seo.title }}</title>
+    <meta name="description" content="{{ target.name }} - {{ page_seo.description }}">
+    <meta name="keywords" content="{{ page_seo.keywords }}">
+
+    {{ page_seo.additional|safe }}
+
+{% endblock %}
+
+
+{% block css %}
+    <!-- product_detail.css -->
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+    <!-- image handling plugin css -->
+    <link rel="stylesheet" href="{% static 'plugins/Smoothproducts-master/css/smoothproducts.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+    <section class="product-detail">
+        <!-- product detail info section -->
+
+        <div class="images-column">
+            <!-- image column conatiner -->
+
+            <div class="sp-wrap">
+                <!-- smooth product plugin wrapper -->
+
+                {% for object in target.images.all %}
+                    <a href="{{ object.image_full.url }}"><img src="{{ object.image_mini.url }}" alt=""></a>
+                {% endfor %}
+            </div><!-- end smooth product plugin wrapper -->
+
+        </div><!-- end image column conatiner -->
+
+
+        <div class="description-column">
+            <!-- description column container -->
+
+            <div class="categories">
+                {% for category in target.category.all %}
+                    <a class="category" href="{% url 'catalog' category.id %}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+
+            <h1 class="name">{{ target.name }}</h1>
+            <span class="help-text">Состав: <span class="material">{{ target.material }}</span></span>
+            <span class="help-text">Рост модели: <span class="model-height">{{ target.models_height }} см</span></span>
+
+            <div class="order-tools-container">
+                <!-- order tools -->
+
+                <div class="price-container">
+                    <!-- price container -->
+
+                    {% if target.prev_price %}
+                        <span class="prev-price">{{ target.prev_price }} руб.</span>
+                    {% endif %}
+                    <span class="current-price">{{ target.price }} руб.</span>
+
+                </div><!-- end price container -->
+
+
+                <div class="make-order">
+                    <!-- sizes container -->
+
+                    <div class="size-buttons">
+                        <!-- size buttons container -->
+                        {% for size in target.size.all %}
+                            <button class="size">{{ size.name }}</button>
+                        {% endfor %}
+
+                        <select name="quantity" id="quantity-select">
+                            <option value="1" class="quantity-option">1</option>
+                            <option value="2" class="quantity-option">2</option>
+                            <option value="3" class="quantity-option">3</option>
+                            <option value="4" class="quantity-option">4</option>
+                            <option value="5" class="quantity-option">5</option>
+                            <option value="6" class="quantity-option">6</option>
+                            <option value="7" class="quantity-option">7</option>
+                            <option value="8" class="quantity-option">8</option>
+                            <option value="9" class="quantity-option">9</option>
+                            <option value="10" class="quantity-option">10</option>
+                        </select>
+
+                    </div><!-- end size buttons container -->
+
+
+                </div><!-- end sizes container -->
+
+                {% if main.sizes_table %}
+                    <a class="sizes-table-link" href="#">Таблица Размеров</a>
+                {% endif %}
+
+
+                <a class="add-item" href="{% url 'add-item' %}" product_id="{{ target.id }}" onclick="ym(56194840, 'reachGoal', 'add_basket'); return true;">В корзину</a>
+
+            </div><!-- end order tools -->
+
+            <div class="add-description">
+                <!-- additional description -->
+
+                <p class="description">{{ target.description }}</p>
+            </div><!-- end additional description -->
+
+        </div><!-- end description column container -->
+    
+    
+    </section><!-- end product detail info section -->
+    
+    
+    <section class="suggestions-section">
+        <!-- suggestions section -->
+            
+        <div class="section-header">
+            <!-- suggestions section header -->
+            
+            <h2>Вам также может понравится</h2>
+        </div><!-- end suggestions section header -->
+    
+        <div class="suggestions">
+            <!-- suggestions container -->
+            {% for product in suggestions %}
+                <div class="product">
+                    <!-- product instance -->
+                    <a class="detail-link" href="{{ product.get_absolute_url }}">
+                        <div class="image-container">
+                            <!-- product-image-container -->
+
+                            <img class="img-fluid main-img" src="{{ product.images.first.image_mini.url }}" alt="">
+                            <div class="image-caption">
+                                <!-- image caption container -->
+
+                                <span>Смотреть >></span>
+                            </div><!-- end image caption container -->
+                        </div><!-- end product-image-container -->
+
+                        <div class="product-caption">
+                            <!-- product caption container -->
+
+                            <span class="product-name">{{ product.name }}</span>
+                            <span class="product-price">{{ product.price }} руб.</span>
+                        </div><!-- end product caption container -->
+                    </a>
+                </div><!-- end product instance -->
+            {% endfor %}
+
+            
+        </div><!-- end suggestions container -->
+    </section><!-- end suggestions section -->
+    
+    
+    <section class="sizes-table-layout">
+        <!-- sizes table layout -->
+    
+        <div class="sizes-content-container">
+            <!-- sizes content container -->
+            
+            <span class="close">x</span>
+
+            <div class="table-image">
+                <!--  -->
+
+                {% if main.sizes_table %}
+                    <img class="img-fluid" src="{{ main.sizes_table.url }}" alt="">
+                {% endif %}
+
+            </div><!-- end  -->
+        </div><!-- end sizes content container -->
+
+    </section><!-- end sizes table layout -->
+
+{% endblock %}
+
+
+{% block script %}
+    <!-- product_detail.css -->
+    <script src="{% static 'js/product_detail.js' %}"></script>
+    <!-- product image handling plugin -->
+    <script src="{% static 'plugins/Smoothproducts-master/js/smoothproducts.js' %}"></script>
+
+{% endblock %}
