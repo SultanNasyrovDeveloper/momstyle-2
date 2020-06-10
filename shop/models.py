@@ -36,6 +36,7 @@ class ProductSize(models.Model):
 class Product(models.Model):
     """"""
     display = models.BooleanField(default=True, verbose_name='Отображается')
+    available = models.BooleanField(default=True, verbose_name='Доступен')
 
     name = models.CharField(max_length=300, default='', blank=True, null=True, verbose_name='Название')
     category = models.ManyToManyField(ProductCategory, verbose_name='Категории')

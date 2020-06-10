@@ -52,55 +52,61 @@
             <span class="help-text">Состав: <span class="material">{{ target.material }}</span></span>
             <span class="help-text">Рост модели: <span class="model-height">{{ target.models_height }} см</span></span>
 
-            <div class="order-tools-container">
-                <!-- order tools -->
+            {% if target.available %}
+                <div class="order-tools-container">
+                    <!-- order tools -->
 
-                <div class="price-container">
-                    <!-- price container -->
+                    <div class="price-container">
+                        <!-- price container -->
 
-                    {% if target.prev_price %}
-                        <span class="prev-price">{{ target.prev_price }} руб.</span>
+                        {% if target.prev_price %}
+                            <span class="prev-price">{{ target.prev_price }} руб.</span>
+                        {% endif %}
+                        <span class="current-price">{{ target.price }} руб.</span>
+
+                    </div><!-- end price container -->
+
+
+                    <div class="make-order">
+                        <!-- sizes container -->
+
+                        <div class="size-buttons">
+                            <!-- size buttons container -->
+                            {% for size in target.size.all %}
+                                <button class="size">{{ size.name }}</button>
+                            {% endfor %}
+
+                            <select name="quantity" id="quantity-select">
+                                <option value="1" class="quantity-option">1</option>
+                                <option value="2" class="quantity-option">2</option>
+                                <option value="3" class="quantity-option">3</option>
+                                <option value="4" class="quantity-option">4</option>
+                                <option value="5" class="quantity-option">5</option>
+                                <option value="6" class="quantity-option">6</option>
+                                <option value="7" class="quantity-option">7</option>
+                                <option value="8" class="quantity-option">8</option>
+                                <option value="9" class="quantity-option">9</option>
+                                <option value="10" class="quantity-option">10</option>
+                            </select>
+
+                        </div><!-- end size buttons container -->
+
+
+                    </div><!-- end sizes container -->
+
+                    {% if main.sizes_table %}
+                        <a class="sizes-table-link" href="#">Таблица Размеров</a>
                     {% endif %}
-                    <span class="current-price">{{ target.price }} руб.</span>
-
-                </div><!-- end price container -->
 
 
-                <div class="make-order">
-                    <!-- sizes container -->
+                    <a class="add-item" href="{% url 'add-item' %}" product_id="{{ target.id }}" onclick="ym(56194840, 'reachGoal', 'add_basket'); return true;">В корзину</a>
 
-                    <div class="size-buttons">
-                        <!-- size buttons container -->
-                        {% for size in target.size.all %}
-                            <button class="size">{{ size.name }}</button>
-                        {% endfor %}
+                </div><!-- end order tools -->
+            {% else %}
+                <span class="my-5" style="color: rgba(0, 0, 0, 0.41)">Данного товара сейчас нет в наличии, но мы готовы сшить его для Вас.</span>
 
-                        <select name="quantity" id="quantity-select">
-                            <option value="1" class="quantity-option">1</option>
-                            <option value="2" class="quantity-option">2</option>
-                            <option value="3" class="quantity-option">3</option>
-                            <option value="4" class="quantity-option">4</option>
-                            <option value="5" class="quantity-option">5</option>
-                            <option value="6" class="quantity-option">6</option>
-                            <option value="7" class="quantity-option">7</option>
-                            <option value="8" class="quantity-option">8</option>
-                            <option value="9" class="quantity-option">9</option>
-                            <option value="10" class="quantity-option">10</option>
-                        </select>
+            {% endif %}
 
-                    </div><!-- end size buttons container -->
-
-
-                </div><!-- end sizes container -->
-
-                {% if main.sizes_table %}
-                    <a class="sizes-table-link" href="#">Таблица Размеров</a>
-                {% endif %}
-
-
-                <a class="add-item" href="{% url 'add-item' %}" product_id="{{ target.id }}" onclick="ym(56194840, 'reachGoal', 'add_basket'); return true;">В корзину</a>
-
-            </div><!-- end order tools -->
 
             <div class="add-description">
                 <!-- additional description -->

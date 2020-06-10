@@ -2,38 +2,36 @@
 {% load static %}
 
 
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {% block meta %}
 
     {% endblock %}
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+{#    <!-- Yandex.Metrika counter -->#}
+{#    <script type="text/javascript" >#}
+{#       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};#}
+{#       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})#}
+{#       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");#}
+{##}
+{#       ym(56194840, "init", {#}
+{#            clickmap:true,#}
+{#            trackLinks:true,#}
+{#            accurateTrackBounce:true,#}
+{#            webvisor:true#}
+{#       });#}
+{#    </script>#}
+{#    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>#}
 
-       ym(56194840, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-       });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
 
-    <!-- base.css -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!-- bootstrap 4 css -->
     <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/icomoon/styles.min.css' %}">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'plugins/mdb.css' %}">
 
 
     <style>
@@ -59,6 +57,9 @@
         }
     </style>
 
+    <!-- base.css -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
     {% block css %}
 
 
@@ -66,165 +67,133 @@
 </head>
 
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-<section class="navigation">
-    <!-- navigation panel -->
-
-    <div class="logo-container">
-        <!-- brand -->
-        <a href="{% url 'index' %}">
+    <nav class="navbar navbar-dark navbar-expand-md bg-faded justify-content-center fixed-top py-0 px-5 z-depth-0">
+        <a href="{% url 'index' %}" class="navbar-brand d-flex w-50 mr-auto">
             {% if main.logo %}
-                <img class="brand" src="{{ main.logo.url }}" alt="Логотип сайта Momstyle shop">
+                <img src="{{ main.logo.url }}" alt="Логотип сайта Momstyle shop" height="50">
             {% else %}
                 Momstyle
             {% endif %}
-
         </a>
-    </div><!-- end brand -->
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar-toggle-content"
+                aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="navbar-toggle-content">
+            <ul class="navbar-nav w-100 justify-content-center">
+                <li>
+                    <a href="{% url 'index' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Главная</a>
+                </li>
+                <li>
+                    <a href="{% url 'catalog' 'all' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Каталог</a>
+                </li>
+                <li>
+                    <a href="{% url 'delivery' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Доставка</a>
+                </li>
+                <li>
+                    <a href="{% url 'blog' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">О нас</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item d-flex align-items-center mr-2">
+                    <a href="">
+                        <i class="fas fa-heart text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="{% url 'cart' %}">
+                        <!-- cart icon -->
+                        <i class="fas fa-shopping-bag text-white"></i>
+                    </a>
+                    <span class="cart-items-number align-self-start d-flex justify-content-center align-items-center ml-0 main-color font-main-light font-size-s">
+                        {{ cart_items_number }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 
-    <div class="toggle-content">
-        <!-- containet for toggle content -->
+    {% block content %}
 
-        <span class="close-toggle">x</span>
+    {% endblock %}
 
-        <div class="page-links">
-        <!-- page links container -->
-            <a href="{% url 'index' %}" class="navigation-link">Главная</a>
-            <a href="{% url 'catalog' 'all' %}" class="navigation-link">Каталог</a>
-            <a href="{% url 'delivery' %}" class="navigation-link">Доставка</a>
-            <a href="{% url 'blog' %}" class="navigation-link">О нас</a>
-        </div><!-- end page links container -->
+    <footer class="page-footer mt-5 bg-secondary mt-auto">
 
-        <div class="cart-link-container">
-            <!-- car links container -->
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
 
-            <!-- cart icon -->
-            <a href="{% url 'cart' %}">
-                <i class="icon-cart text-white" style="font-size: 20px;"></i>
-                <span class="cart-items-number">{{ cart_items_number }}</span>
-            </a>
+            <!-- Grid row -->
+            <div class="row">
 
-        </div><!-- end car links container -->
+                <!-- Grid column -->
+                <div class="col-md-3 mt-3">
+                    <span class="column-header">Контакты:</span>
+                    <div class="contact-line"><i class="icon-iphone"></i>{{ main.phone_number }}</div><!-- end phone line -->
+                    <div class="contact-line"><i class="icon-envelop4"></i>{{ main.email }}</div><!-- end phone line -->
+                    <div class="contact-line"><i class="icon-location3"></i>{{ main.address }}</div><!-- end phone line -->
+                    <div class="contact-line"><i class="icon-watch2"></i>{{ main.working_hours }}</div><!-- end phone line -->
+                </div>
+                <!-- Grid column -->
 
-    </div><!-- containet for toggle content -->
+                <hr class="clearfix w-100 d-md-none pb-3">
 
+                <!-- Grid column -->
+                <div class="col-md-3 mt-3">
+                    <span class="column-header">Ссылки:</span>
+                    <a href="{% url 'index' %}" class="footer-link">- Главная</a>
+                    <a href="{% url 'catalog' 'all' %}" class="footer-link">- Каталог</a>
+                    <a href="{% url 'delivery' %}" class="footer-link">- Доставка</a>
+                    <a href="{% url 'blog' %}" class="footer-link">- О нас</a>
 
-    <div class="toggle-btn">
-        <!-- toggle button contaioner -->
-        <img class="burger" src="{{ icons.burger.url }}" alt="">
-    </div><!-- toggle button contaioner -->
+                </div>
 
+                <div class="col-md-3 mb-3">
+                    <span class="column-header">Связаться с нами:</span>
 
-</section><!-- end navigation panel -->
+                    <form action="{% url 'contact-us' %}" class="contact-us">
+                        <input type="text" class="contact-name" placeholder="Ваше имя" required>
+                        <input type="text" class="contact-phone" placeholder="+7 (900) 000-0000" required>
+                        <button type="submit" class="contact-us-btn">Отправить</button>
+                    </form>
+                </div>
 
+                <div class="col-md-3 mb-3">
+                    <div class="up">
+                    <!-- up button -->
+                        <i class="material-icons text-white">arrow_circle_up</i>
+                    </div><!-- end up button -->
+                </div>
 
-{% block content %}
-
-{% endblock %}
-
-
-<section class="footer">
-        <!-- footer section -->
-
-        <div class="contacts-column">
-            <!-- contacts columns container -->
-
-            <span class="column-header">Контакты:</span>
-
-            <div class="contact-line">
-                <!-- phone line -->
-
-                <i class="icon-iphone"></i>
-                {{ main.phone_number }}
-            </div><!-- end phone line -->
-
-
-            <div class="contact-line">
-                <!-- email line -->
-
-                <i class="icon-envelop4"></i>
-                {{ main.email }}
-            </div><!-- end phone line -->
+            </div>
+            <!-- Grid row -->
+        </div>
+        <div class="footer-copyright text-center py-3">© <span class="current-year"></span> Copyright: ИП. Юшков</div>
+    </footer>
 
 
-            <div class="contact-line">
-                <!-- address line -->
+    <!-- jquery -->
+    <script src="{% static 'plugins/jquery.js' %}"></script>
+    <!-- TweenMax -->
+    <script src="{% static 'plugins/gsap/TweenMax.min.js' %}"></script>
+    <!-- gsap scroll to plugin -->
+    <script src="{% static 'plugins/gsap/plugins/ScrollToPlugin.min.js' %}"></script>
+    <!-- ajax setup -->
+    <script src="{% static 'js/ajax_setup.js' %}"></script>
+    <!-- input mask plugin -->
+    <script src="{% static 'plugins/masked input/jquery.maskedinput.js' %}"></script>
+    <script src="{% static 'plugins/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/boostrap.min.js' %}"></script>
+    <script src="{% static 'plugins/mdb.min.js' %}"></script>
 
-                <i class="icon-location3"></i>
-                {{ main.address }}
-            </div><!-- end phone line -->
+    <!-- base.js -->
+    <script src="{% static 'js/base.js' %}"></script>
 
+    {% block script %}
 
-            <div class="contact-line">
-                <!-- working hours line -->
-
-                <i class="icon-watch2"></i>
-                {{ main.working_hours }}
-            </div><!-- end phone line -->
-
-        </div><!-- end contacts columns container -->
-
-
-        <div class="links-column">
-            <!-- links column container -->
-
-            <span class="column-header">Ссылки:</span>
-
-            <a href="{% url 'index' %}" class="footer-link">- Главная</a>
-            <a href="{% url 'catalog' 'all' %}" class="footer-link">- Каталог</a>
-            <a href="{% url 'delivery' %}" class="footer-link">- Доставка</a>
-            <a href="{% url 'blog' %}" class="footer-link">- О нас</a>
-
-        </div><!-- end links column container -->
-
-
-        <div class="contact-us-column">
-            <!-- contact us column -->
-
-            <span class="column-header">Связаться с нами:</span>
-
-            <form action="{% url 'contact-us' %}" class="contact-us">
-                <input type="text" class="contact-name" placeholder="Ваше имя" required>
-                <input type="text" class="contact-phone" placeholder="+7 (900) 000-0000" required>
-                <button type="submit" class="contact-us-btn">Отправить</button>
-            </form>
-
-        </div><!-- end contact us column -->
-    
-    
-        <div class="up-btn-container">
-            <!-- up button container -->
-            
-            <div class="up">
-                <!-- up button -->
-
-                <i class="icon-circle-up2 icon-2x"></i>
-            </div><!-- end up button -->
-
-        </div><!-- end up button container -->
-
-    </section><!-- end footer section -->
-
-
-
-<!-- jquery -->
-<script src="{% static 'plugins/jquery.js' %}"></script>
-<!-- TweenMax -->
-<script src="{% static 'plugins/gsap/TweenMax.min.js' %}"></script>
-<!-- gsap scroll to plugin -->
-<script src="{% static 'plugins/gsap/plugins/ScrollToPlugin.min.js' %}"></script>
-<!-- ajax setup -->
-<script src="{% static 'js/ajax_setup.js' %}"></script>
-<!-- input mask plugin -->
-<script src="{% static 'plugins/masked input/jquery.maskedinput.js' %}"></script>
-<!-- base.js -->
-<script src="{% static 'js/base.js' %}"></script>
-
-{% block script %}
-
-{% endblock %}
+    {% endblock %}
 
 
 </body>
