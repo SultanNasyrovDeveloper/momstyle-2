@@ -1,5 +1,8 @@
 let nav = document.querySelector('.navbar');
 
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+
 function darkenNavbar () {
     TweenMax.to(nav, 1, {backgroundColor: '#808080'})
 }
@@ -21,7 +24,7 @@ function activateNavbarColorChanger() {
 }
 
 $(document).ready(function () {
-    const card = $('.card');
+    const card = $('.product-card');
 
     card.mouseenter(function cardMouseEnter() {
         let imageCaption = $(this).find('.image-caption');
@@ -40,41 +43,3 @@ $(document).ready(function () {
 
     const productCardBtn = card.find('.btn');
 });
-
-    //
-    //
-    // // contact us form phone input field mask
-    // $(".contact-phone").mask("+7 (999) 999-9999");
-    //
-    // // handle contact us form
-    // $('.contact-us').submit(function (e) {
-    //     e.preventDefault();
-    //
-    //     // prepare data
-    //     let name = $('.contact-name').val();
-    //     let phone = $('.contact-phone').val();
-    //     let url = $(this).attr('action');
-    //     let data = {'name': name, 'phone': phone};
-    //
-    //     // make ajax call
-    //     $.ajax({
-    //         url: url,
-    //         type: 'POST',
-    //         data: data,
-    //         dataType: 'json',
-    //         success: function (response) {
-    //             console.log("success");
-    //         },
-    //         error: function () {
-    //             console.log('Error');
-    //         }
-    //     });
-    // });
-    //
-    // // handle up button work
-    // $('.up').click(function () {
-    //     console.log('Clicked')
-    //     TweenMax.to(window, 0.5, {scrollTo: 0})
-    // });
-    //
-// });

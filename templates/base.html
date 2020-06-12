@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'plugins/mdb.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/utils.css' %}">
 
     <style>
         {# h1 font #}
@@ -69,7 +69,9 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <nav class="navbar navbar-dark navbar-expand-md bg-faded justify-content-center fixed-top py-0 px-5 z-depth-0">
+    <nav class="navbar navbar-dark navbar-expand-md bg-faded justify-content-center fixed-top py-0
+                px-1 px-sm-2 px-md-5 z-depth-0"
+    >
         <a href="{% url 'index' %}" class="navbar-brand d-flex w-50 mr-auto">
             {% if main.logo %}
                 <img src="{{ main.logo.url }}" alt="Логотип сайта Momstyle shop" height="50">
@@ -81,7 +83,7 @@
                 aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse w-100" id="navbar-toggle-content">
+        <div class="navbar-collapse collapse w-100 pb-2 pb-md-0" id="navbar-toggle-content">
             <ul class="navbar-nav w-100 justify-content-center">
                 <li>
                     <a href="{% url 'index' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Главная</a>
@@ -103,13 +105,16 @@
                     </a>
                 </li>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="{% url 'cart' %}">
+                    <a href="{% url 'cart' %}" class="d-flex h-100">
                         <!-- cart icon -->
-                        <i class="fas fa-shopping-bag text-white"></i>
+                        <i class="fas fa-shopping-bag text-white align-self-center"></i>
+                        <span class="cart-items-number align-self-start d-flex justify-content-center
+                            align-items-center main-color-bg font-main-light font-size-s text-white ml-1"
+                        >
+                            {{ cart_items_number }}
+                        </span>
                     </a>
-                    <span class="cart-items-number align-self-start d-flex justify-content-center align-items-center ml-0 main-color font-main-light font-size-s">
-                        {{ cart_items_number }}
-                    </span>
+
                 </li>
             </ul>
         </div>
@@ -123,7 +128,7 @@
     <footer class="page-footer mt-5 bg-secondary mt-auto">
 
         <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left">
+        <div class="container-fluid text-center text-md-left px-1 px-sm-2 px-md-5">
 
             <!-- Grid row -->
             <div class="row">
@@ -174,21 +179,15 @@
     </footer>
 
 
-    <!-- jquery -->
     <script src="{% static 'plugins/jquery.js' %}"></script>
-    <!-- TweenMax -->
     <script src="{% static 'plugins/gsap/TweenMax.min.js' %}"></script>
-    <!-- gsap scroll to plugin -->
     <script src="{% static 'plugins/gsap/plugins/ScrollToPlugin.min.js' %}"></script>
-    <!-- ajax setup -->
-    <script src="{% static 'js/ajax_setup.js' %}"></script>
-    <!-- input mask plugin -->
     <script src="{% static 'plugins/masked input/jquery.maskedinput.js' %}"></script>
     <script src="{% static 'plugins/popper.min.js' %}"></script>
     <script src="{% static 'plugins/boostrap.min.js' %}"></script>
     <script src="{% static 'plugins/mdb.min.js' %}"></script>
+    <script src="{% static 'plugins/axios.min.js' %}"></script>
 
-    <!-- base.js -->
     <script src="{% static 'js/base.js' %}"></script>
 
     {% block script %}

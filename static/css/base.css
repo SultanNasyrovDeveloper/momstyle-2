@@ -1,80 +1,10 @@
-html{
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-}
 
-body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    max-width: 1920px;
-}
-
-.font-main-narrow{
-    font-family: "Main narrow", sans-serif;
-    letter-spacing: 0.04rem;
-}
-.font-main-light{
-    font-family: "Main light", sans-serif;
-    letter-spacing: 0.045rem;
- }
-.secondary-font{
-    font-family: 'Bebas bold', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.045rem;
-}
-
-.font-size-xs{
-    font-size: 0.65rem;
-}
-.font-size-s{
-    font-size: 0.75rem;
-}
-.font-size-m{
-    font-size: 0.9rem;
-}
-.font-size-l{
-    font-size: 1rem;
-}
-.font-size-xl{
-    font-size: 2rem;
-}
-
-.main-color{
-    color: #ed7e7c !important;
-}
-.color-grey50{
-    color: rgba(0, 0, 0, 0.5);
-}
-.color-grey60{
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.hover-main-color-bg:hover{
-    background-color: #ed7e7c!important;
-    color: white;
-}
-.hover-main-color:hover{
-    color: #ed7e7c;
-}
-
-.main-color-bg{
-    background-color: #ed7e7c;
-}
-.light-bg{
-    background-color: rgba(0, 0, 0, 0.03);
-}
 
 
 .cart-items-number{
-    height: 0.7rem;
-    width: 0.7rem;
-    margin-left: 0.25rem;
-
+    height: 1rem;
+    width: 1rem;
     border-radius: 50%;
-
-    background-color: white;
 }
 .icon-small{
     font-size: 20px !important;

@@ -40,7 +40,9 @@ class Product(models.Model):
 
     name = models.CharField(max_length=300, default='', blank=True, null=True, verbose_name='Название')
     category = models.ManyToManyField(ProductCategory, verbose_name='Категории')
-    size = models.ManyToManyField(ProductSize, related_name='sizes', related_query_name='sizes', verbose_name='Размеры')
+    sizes = models.ManyToManyField(
+        ProductSize, related_name='sizes', related_query_name='sizes', verbose_name='Размеры',
+    )
 
     prev_price = models.PositiveIntegerField(default=None, null=True, blank=True, verbose_name='Цена без скидки')
     price = models.PositiveSmallIntegerField(default=0, verbose_name='Цена')
@@ -61,6 +63,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'pk': self.id})
+
+    def get_default_size(self):
+        return self.size
 
 
 class ProductImage(models.Model):

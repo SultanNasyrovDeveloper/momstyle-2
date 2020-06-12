@@ -1,0 +1,56 @@
+html{
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    max-width: 1920px;
+}
+
+.font-main-narrow{
+    font-family: "Main narrow", sans-serif;
+    letter-spacing: 0.04rem;
+}
+.font-main-light{
+    font-family: "Main light", sans-serif;
+    letter-spacing: 0.045rem;
+ }
+.secondary-font{
+    font-family: 'Bebas bold', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.045rem;
+}
+.secondary-font-light{
+    font-family: 'Bebas book', sans-serif;
+    letter-spacing: 0.05rem;
+}
+
+
+.main-color{
+    color: #ed7e7c !important;
+}
+.color-grey50{
+    color: rgba(0, 0, 0, 0.5);
+}
+.color-grey60{
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.hover-main-color-bg:hover{
+    background-color: #ed7e7c!important;
+    color: white;
+}
+.hover-main-color:hover{
+    color: #ed7e7c;
+}
+
+.main-color-bg{
+    background-color: #ed7e7c;
+}
+.light-bg{
+    background-color: rgba(0, 0, 0, 0.03);
+}

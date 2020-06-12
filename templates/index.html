@@ -35,12 +35,15 @@
             <!-- banner caption container -->
             <div class="taglines-container">
                 <!-- container for banner taglines -->
-                <h1 class="main-tag">{{ seo.index_h1 }}</h1>
-                <h2 class="second-tag">Будь красива в любом положении</h2>
-
+                <h1 class="main-tag text-center secondary-font text-white font-size-xxl">
+                    Бутик одежды для беременных
+                </h1>
+                <h2 class="second-tag secondary-font-light text-white" style="font-size: 3rem">
+                    Будь красива в любом положении
+                </h2>
                 <div class="decorative-text">
                     <!-- decorative text container -->
-                    <span>MOMSTYLE</span>
+                    <span class="secondary-font">MOMSTYLE</span>
                 </div><!-- end decorative text container -->
             </div><!-- end container for banner taglines -->
         </div><!-- end banner caption container -->
@@ -51,21 +54,21 @@
     <section class="container-fluid">
         <div class="row">
             <!-- SECTION HEADER -->
-            <div class="col-12 d-flex flex-column justify-content-center align-items-center py-4">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center py-5">
                 <h2 class="secondary-font font-size-xl color-grey60 text-center">{{ main.product_h2 }}</h2>
-                <p class="font-main-light font-size-l color-grey50 w-50 text-center text-uppercase">
+                <p class="font-main-light font-size-l color-grey50 w-75 text-center text-uppercase">
                     {{ main.product_par }}
                 </p>
             </div><!-- /SECTION HEADER -->
 
             <!-- PRODUCTS LIST -->
-            <div class="col-12 px-5">
+            <div class="col-12 px-1 px-sm-2 px-md-5">
                 <div class="container-fluid">
                     <div class="row d-flex justify-content-center">
                         {% for product in products %}
                             <div class="col-12 col-sm-4 col-md-3 col-lg-2 p-2">
                                 <!-- product instance -->
-                                <div class="card border-0 z-depth-0">
+                                <div class="card border-0 z-depth-0 product-card">
                                     <a href="{{ product.get_absolute_url }}" class="text-decoration-none">
                                         <div class="image-container">
                                             <img class="img-fluid main-img" src="{{ product.images.first.image_mini.url }}" alt="">
@@ -148,7 +151,7 @@
                     <div class="row d-flex justify-content-center">
                         {% for category in categories %}
                             <div class="col-12 col-sm-6 col-md-3 p-2">
-                               <div class="card border-0 z-depth-0">
+                               <div class="card border-0 z-depth-0 product-card">
                                    <a href="{% url 'catalog' category.id %}">
                                        <div class="image-container">
                                             <!-- image container -->

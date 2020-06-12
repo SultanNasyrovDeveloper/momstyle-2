@@ -1,89 +1,47 @@
 from shop.models import Product, Order, OrderItem
 
 
-class CartItem(object):
-    """Cart Item """
-    def __init__(self, product_id, size, quantity):
-        product = Product.objects.get(id=product_id)
-        subtotal = product.price * int(quantity)
-        self.key = product.name + ' ({})'.format(size)
-        self.name = product.name
-        self.quantity = int(quantity)
-        self.size = str(size)
-        self.price = int(product.price)
-        self.id = product.id
-        self.subtotal = subtotal
+class CartItem:
+    def __init__(self, product_id, quantity=1, size=None):
+        self.product_id = product_id
+        self.quantity = quantity
+        self.size = size or self.product.get_default_size()
 
-    def to_dict(self):
-        cart_item_dict = {
-            'id': self.id,
-            'name': self.name,
-            'quantity': self.quantity,
-            'size': self.size,
-            'price': self.price,
-            'subtotal': self.subtotal,
-        }
-        return cart_item_dict
+    @property
+    def product(self):
+        return Product.objects.get(id=int(self.product_id))
+
+    def get_total_price(self):
+        return self.product.price * self.quantity
 
 
-class Cart(object):
-    """"""
-    def __init__(self, request):
+class Cart:
+    def __init__(self):
+        self.items = []
 
-        self.session = request.session
+    def get_items_number(self):
+        return len(self.items)
 
-        if 'cart' in self.session:
-            self.cart = self.session['cart']
-        else:
-            self.cart = {}
-
-    def save(self):
-        self.session['cart'] = self.cart
-
-    def count_items(self):
-        return len(self.cart)
-
-    def get_items_list(self):
-        return list(self.cart.values())
-
-    def add_item(self, product_id, size, quantity):
-
-        item = CartItem(product_id, size, quantity)
-
-        if item.key in self.cart:
-            if self.cart[item.key]['size'] == item.size:
-                self.cart[item.key]['quantity'] = item.quantity
-                self.cart[item.key]['subtotal'] = item.subtotal
-                self.save()
-        else:
-            self.cart[item.key] = item.to_dict()
-            self.save()
-
-    def change_quantity(self, key, new_quantity):
-        self.cart[key]['quantity'] = int(new_quantity)
-        self.cart[key]['subtotal'] = int(self.cart[key]['price']) * int(new_quantity)
-        self.save()
-
-    def delete_item(self, key):
-        self.cart.pop(key)
-        self.save()
+    def get_total_price(self):
+        return sum([item.get_total_price() for item in self.items])
 
     def clean(self):
-        self.cart = {}
-        self.save()
+        self.items = []
 
-    def total(self):
-        total = 0
-        for item in self.get_items_list():
-            total += int(item['subtotal'])
-        return total
+    def add_item(self, item):
+        self.items.append(item)
 
-    def make_order(self, name, phone_number):
-        order = Order(customer=name, phone_number=phone_number, total=self.total())
-        order.save()
-        for item in self.get_items_list():
-            order_item = OrderItem(order=order, name=item['name'], size=item['size'],
-                                   price=item['price'], quantity=item['quantity'], subtotal=item['subtotal'])
-            order_item.save()
-        self.clean()
-        return order
+    def remove_item(self, item):
+        self.items.remove(item)
+
+    def change_item_quantity(self, item_product_id, new_quantity):
+        item = self._get_item_by_product_id(item_product_id)
+        item.quantity = new_quantity
+
+    def change_item_size(selfself, itm_product_id, new_size):
+        pass
+
+    def _get_item_by_product_id(self, product_id):
+        for item in self.items:
+            if item.product_id == product_id:
+                return item
