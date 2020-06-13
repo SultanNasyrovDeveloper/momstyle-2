@@ -26,11 +26,15 @@ class BaseSessionObject:
         self.items = []
 
     def add_item(self, item):
-        if not item.product_id in self:
-            self.items.append(item)
+        self.items.append(item)
 
     def remove_item(self, item):
         self.items.remove(item)
+
+    def remove_item_by_product_id(self, product_id):
+        if product_id in self:
+            item = self._get_item_by_product_id(product_id)
+            self.remove_item(item)
 
     def _get_item_by_product_id(self, product_id):
         for item in self.items:

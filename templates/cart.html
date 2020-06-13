@@ -21,26 +21,81 @@
 {% block content %}
 
     <section class="container-fluid px-5" style="margin-top: 6rem">
-        <h1 class="secondary-font font-size-xxl color-grey60">Корзина</h1>
+
     </section>
 
     <section>
         <div class="container-fluid px-5">
             <div class="row">
                 <div class="col-12 col-md-8 p-2">
-                    <div class="card cart-items light-bg">
-                        {% for cart_item in cart.items %}
-                            <div class="">{{ cart_item }}</div>
-                        {% empty %}
-                            <span>Корзина пуста...</span>#}
-                            <a href="{% url 'catalog' 'all' %}">Перейти в каталог</a>
-                        {% endfor %}
+                    <div class="card cart-items z-depth-0">
+                        <div class="card-body">
+                            <div>
+                                <h1 class="secondary-font font-size-xxl color-grey60">Корзина</h1>
+                            </div>
+                            {% for item in cart.items %}
+                                <div class="container-fluid light-bg my-1 p-2 cart-item"
+                                        data-item-id="{{ item.product.id }}" data-item-size="{{ item.size }}"
+                                >
+                                    <div class="row">
+                                        <!-- cart item instance -->
+                                        <div class="col-6 col-sm-4">
+                                            <a href="{% url 'product_detail' item.product.id %}" class="name">
+                                                {{ item.product.name }}
+                                            </a>
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-1">
+                                            <span class="size">{{ item.size }}</span>
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2">
+                                            <span class="help-text price-text">
+                                                <span class="price">{{ item.product.price }}</span> руб.
+                                            </span>
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-1">
+                                            <select onchange="changeItemQuantity({{ item.product_id }}, '{{ item.size }}', value)">
+                                                {% for _ in '0123456789' %}
+                                                    <option value="{{ forloop.counter }}" {% if item.quantity == forloop.counter %} selected{% endif %}>
+                                                        {{ forloop.counter }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2">
+                                            <span class="help-text">
+                                                <span class="subtotal">{{ item.total_price }}</span> руб.
+                                            </span>
+                                        </div>
+                                        <div class="col-6 col-sm-4 col-md-2">
+                                            <button onclick="deleteItem(event, {{ item.product.id }}, '{{ item.size }}')">
+                                                удалить
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div><!-- end cart item instance -->
+                            {% endfor %}
 
+
+                            <div class="empty-cart {% if cart.items %}d-none{% endif %}">
+                                <span>Корзина пуста...</span>
+                                <a href="{% url 'product_list' %}">Перейти в каталог</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 p-2">
-                    <div class="card"></div>
-                </div>
+                {% if cart.items %}
+                    <div class="col-12 col-md-4 p-2">
+                        <div class="card light-bg z-depth-0">
+                            <div class="card-body">
+                                <div></div>
+                                <div class="d-flex justify-content-center">Итого:</div>
+                                <div id="total-price">{{ cart.total_price }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
             </div>
         </div>
     </section>

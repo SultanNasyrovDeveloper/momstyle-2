@@ -59,7 +59,7 @@
                     {% if target.available %}
                         <div class="size-buttons">
                             {% for size in target.sizes.all %}
-                                <button class="size">{{ size.name }}</button>
+                                <button class="size{% if forloop.counter == 1 %} chosen{% endif %}">{{ size.name }}</button>
                             {% endfor %}
 
                             <select name="quantity" id="quantity-select">

@@ -1,5 +1,62 @@
+const width = $('#overall-container').width();
+$('#overall-fixed').width(width);
+
+function removeItemByIdAndSize (itemId, size) {
+    $(`.cart-item[data-item-id='${itemId}'][data-item-size='${size}']`).remove();
+}
+
+function changeCartTotalPrice(newTotalPrice) {
+    $('#total-price').html(newTotalPrice);
+}
+
+function changeItemTotalPrice(itemId, size, newTotalPrice) {
+    const item = $(`.cart-item[data-item-id='${itemId}'][data-item-size='${size}']`);
+    console.log(item);
+    const totalPrice = item.find('.subtotal');
+    console.log(totalPrice);
+    console.log(newTotalPrice);
+    totalPrice.html(newTotalPrice);
+}
+
+async function deleteItem (event, itemId, size) {
+    axios.post('cart/remove-item/', {id: itemId, size: size})
+        .then(response => {
+            const data = response.data;
+            removeItemByIdAndSize(itemId, size);
+            changeCartItemsNumber(data.items_number);
+            changeCartTotalPrice(data.total_price);
+            if (data.items_number === 0) {
+                $('.empty-cart').removeClass('d-none');
+                $('#overall-container').addClass('d-none');
+            }
+            toastr.success(response.data.text);
+        })
+        .catch(error => {
+            toastr.error('При удалении товара произошла ошибка.')
+        })
+}
+
+
+async function changeItemQuantity(productId, size, newValue) {
+    axios.post('cart/change-quantity/', {id: productId, size: size, quantity: newValue})
+        .then(response => {
+            const data = response.data;
+            changeCartTotalPrice(data.cart_total);
+            console.log(data)
+            changeItemTotalPrice(productId, size, data.item_total);
+            toastr.success(data.text);
+        })
+        .catch(error => {
+            toastr.error('Не удалось поменять количество');
+        })
+}
+
+
 $(document).ready(function () {
     darkenNavbar();
+
+
+
     //
     // // variables
     // const total = $('.total');
