@@ -80,11 +80,3 @@ class ProductDetailView(generic.DetailView):
         context['page_seo'] = self.object.page_seo
         return context
 
-
-def contact_us(request):
-    if request.method == 'POST' and request.is_ajax():
-        name, phone = request.POST['name'], request.POST['phone']
-        ContactPerson.objects.create(name=name, phone=phone)
-        return HttpResponse({})
-    else:
-        raise Http404

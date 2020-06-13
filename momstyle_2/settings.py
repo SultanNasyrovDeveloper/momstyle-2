@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'shop',
     'settings',
     'seo',
+    'about_us'
 ]
 
 MIDDLEWARE = [

@@ -10,6 +10,4 @@ urlpatterns = [
     path('add-item/', views.add_item, name='add-item'),
     path('remove-item/', views.remove_item, name='delete-item'),
     path('change-quantity/', views.change_item_quantity, name='change-quantity'),
-    # path('clean/', clean, name='clean'),
-    # path('make-order/', make_order, name='make-order'),
 ]

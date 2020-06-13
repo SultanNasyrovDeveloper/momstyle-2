@@ -11,70 +11,36 @@
 {% endblock %}
 
 {% block css %}
+    <link rel="stylesheet" href="{% static 'plugins/fotorama.css' %}">
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
 
 {% endblock %}
 
 
 {% block content %}
-
-    <section class="page-header">
-        <!-- page header -->
-
-        <div class="image-container">
-            <!-- image container -->
-            {% if main.about_header_image %}
-                <img class="header-image" src="{{ main.about_header_image.url }}" alt="">
-            {% endif %}
-        </div><!-- end image container -->
-
-        <div class="page-header-caption">
-            <!-- page header caption -->
-
-            <h1>{{ seo.about_h1 }}</h1>
-        </div><!-- end page header caption -->
-
-    </section><!-- end page header -->
-
-
-    <section class="posts">
-        {% for post in posts %}
-            <div class="post">
-
-                <a href="{{ post.get_absolute_url }}">
-
-                    <div class="image-container">
-                        <!-- post-image-container -->
-
-                            <img class="img-fluid main-img" src="{{ post.image.url }}" alt="">
-                            <div class="image-caption">
-                                <!-- image caption container -->
-
-                                <span>Читать >></span>
-                            </div><!-- end image caption container -->
-
-                    </div><!-- end product-image-container -->
-
-                    <div class="post-caption">
-                        <span class="name">{{ post.title }}</span>
-
-                        <p class="short-par">{{ post.paragraphs.all.first.text }}</p>
-
-                        <div class="ext">
-                            <span>{{ post.creation_date }}</span>
-                            <a href="{% url 'like' %}" class="like" post-id="{{ post.id }}">
-                                <img src="{{ icons.like.url }}" alt="">
-                                <span class="likes-number">{{ post.likes_number }}</span>
-                            </a>
+    <div class="container-fluid px-5" style="margin-top: 6rem">
+        <div class="">
+            <h1>О нас</h1>
+        </div>
+        {% for page_block in blocks  %}
+            <div class="container-fluid p-0 my-5">
+                <div class="row">
+                    <div class="col-6 d-flex flex-column justify-content-center align-self-center">
+                        <div>{{ page_block.title }}</div>
+                        <div>{{ page_block.text }}</div>
+                    </div>
+                    <div class="col-6 m-0">
+                        <div class="fotorama">
+                            {% for image in page_block.images.all %}
+                                <img src="{{ image.file.url }}" alt="">
+                            {% endfor %}
                         </div>
                     </div>
-
-                </a>
-
+                </div>
             </div>
         {% endfor %}
 
-    </section>
+    </div>
 
 {% endblock %}
 
@@ -82,5 +48,6 @@
 
 {% block script %}
     <!-- about.js -->
+    <script src="{% static 'plugins/fotorama.js' %}"></script>
     <script src="{% static 'js/about.js' %}"></script>
 {% endblock %}

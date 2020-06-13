@@ -94,7 +94,7 @@
                     <a href="{% url 'delivery' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Доставка</a>
                 </li>
                 <li>
-                    <a href="" class="font-main-light text-white text-uppercase mx-2 font-size-s">О нас</a>
+                    <a href="{% url 'about' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">О нас</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end h-100">
@@ -163,7 +163,7 @@
                 <div class="col-md-3 mb-3">
                     <span class="column-header">Связаться с нами:</span>
 
-                    <form action="{% url 'contact-us' %}" class="contact-us">
+                    <form action="" class="contact-us">
                         <input type="text" class="contact-name" placeholder="Ваше имя" required>
                         <input type="text" class="contact-phone" placeholder="+7 (900) 000-0000" required>
                         <button type="submit" class="contact-us-btn">Отправить</button>
