@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_cleanup',
+    'django_filters',
 
     'shop',
     'settings',

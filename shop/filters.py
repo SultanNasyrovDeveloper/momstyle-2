@@ -3,6 +3,9 @@ from .models import Product
 
 
 class ProductFilter(filters.FilterSet):
+
+    price = filters.RangeFilter()
+
     class Meta:
         model = Product
-        fields = ('category', 'size')
+        fields = ('available', 'category', 'sizes', 'price')

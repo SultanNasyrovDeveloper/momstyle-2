@@ -1,3 +1,6 @@
+import json
+import random
+
 from django.shortcuts import render, Http404, HttpResponse, get_object_or_404
 from django.views import generic
 
@@ -5,9 +8,7 @@ from settings.models import Banner, DeliveryPaymentInfo
 from seo.models import SitePageSeo
 
 from .models import ProductCategory, Product, ContactPerson
-
-import json
-import random
+from . import filters
 
 
 def random_queryset(class_name, number, except_id=None):
@@ -18,7 +19,7 @@ def random_queryset(class_name, number, except_id=None):
     try:
         random_ids = random.sample(ids, number)
     except ValueError:
-        random_ids = []
+        random_ids = ids
     queryset = class_name.displayed.filter(id__in=random_ids)
     return queryset
 
@@ -38,22 +39,22 @@ class Index(generic.View):
         return render(request, 'index.html', context)
 
 
-class Catalog(generic.View):
+class ProductListView(generic.View):
 
     page_name = 'Каталог'
 
-    def get(self, request, category):
-        context = {}
-        if category == 'all':
-            products = Product.displayed.all()
-        else:
-            category = ProductCategory.objects.get(id=int(category))
-            products = Product.displayed.filter(category=category)
-        context['products'] = products
-        context['categories'] = ProductCategory.objects.all()
+    def get(self, request, *args, **kwargs):
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
-        context['page_seo'] = seo
-        return render(request, 'catalog.html', context)
+        context = {
+            'filter': filters.ProductFilter(request.GET, queryset=Product.displayed.all()),
+            'page_seo': seo,
+        }
+        return render(request, 'product_list.html', context)
+
+
+class Catalog(generic.View):
+
+    page_name = 'Каталог'
 
 
 class Delivery(generic.View):
@@ -87,4 +88,3 @@ def contact_us(request):
         return HttpResponse({})
     else:
         raise Http404
-

@@ -45,7 +45,7 @@ body{
     color: white;
 }
 .hover-main-color:hover{
-    color: #ed7e7c;
+    color: #ed7e7c !important;
 }
 
 .main-color-bg{

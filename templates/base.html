@@ -26,12 +26,11 @@
 {#    </script>#}
 {#    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>#}
 
-
-
     <!-- bootstrap 4 css -->
     <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'plugins/mdb.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/toasrt.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/utils.css' %}">
 
     <style>
@@ -89,13 +88,13 @@
                     <a href="{% url 'index' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Главная</a>
                 </li>
                 <li>
-                    <a href="{% url 'catalog' 'all' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Каталог</a>
+                    <a href="{% url 'product_list' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Каталог</a>
                 </li>
                 <li>
                     <a href="{% url 'delivery' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Доставка</a>
                 </li>
                 <li>
-                    <a href="{% url 'blog' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">О нас</a>
+                    <a href="" class="font-main-light text-white text-uppercase mx-2 font-size-s">О нас</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
@@ -119,7 +118,6 @@
             </ul>
         </div>
     </nav>
-
 
     {% block content %}
 
@@ -149,9 +147,9 @@
                 <div class="col-md-3 mt-3">
                     <span class="column-header">Ссылки:</span>
                     <a href="{% url 'index' %}" class="footer-link">- Главная</a>
-                    <a href="{% url 'catalog' 'all' %}" class="footer-link">- Каталог</a>
+                    <a href="{% url 'product_list' %}" class="footer-link">- Каталог</a>
                     <a href="{% url 'delivery' %}" class="footer-link">- Доставка</a>
-                    <a href="{% url 'blog' %}" class="footer-link">- О нас</a>
+                    <a href="" class="footer-link">- О нас</a>
 
                 </div>
 
@@ -187,6 +185,7 @@
     <script src="{% static 'plugins/boostrap.min.js' %}"></script>
     <script src="{% static 'plugins/mdb.min.js' %}"></script>
     <script src="{% static 'plugins/axios.min.js' %}"></script>
+    <script src="{% static 'plugins/toastr.min.js' %}"></script>
 
     <script src="{% static 'js/base.js' %}"></script>
 

@@ -71,8 +71,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     """"""
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', related_query_name='images')
-    image_full = models.ImageField(upload_to='products/', null=True, blank=True, verbose_name='Изображение')
-    image_mini = models.ImageField(upload_to='products/', null=True, blank=True, verbose_name='Изображение(миниатюра)')
+    file = models.ImageField(upload_to='products/', null=True, blank=True, verbose_name='Изображение')
 
     class Meta:
         verbose_name = 'Изображение'

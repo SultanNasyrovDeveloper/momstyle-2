@@ -7,13 +7,13 @@ from django.http import JsonResponse
 
 from seo.models import SitePageSeo
 
-from .services import CartService
+# from .services import CartService
 
 
 class CartView(generic.View):
     def get(self, request, *args, **kwargs):
         seo, _ = SitePageSeo.objects.get_or_create(page_name='Корзина')
-        cart = CartService.get_or_create(request)
+        # cart = CartService.get_or_create(request)
         context = {
             'page_seo': seo,
             'cart': CartService.serialize_cart(cart)

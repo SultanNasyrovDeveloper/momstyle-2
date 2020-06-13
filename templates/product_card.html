@@ -1,0 +1,41 @@
+<!-- product instance -->
+<div class="card border-0 z-depth-0 product-card mb-3">
+    <a href="{{ product.get_absolute_url }}" class="text-decoration-none">
+        <div class="image-container">
+            <img class="img-fluid main-img" src="{{ product.images.first.file.url }}" alt="">
+            <div class="image-caption">
+                <button class="btn btn-transparent px-2 py-1 z-depth-0 text-white hover-main-color"
+                        style="position: absolute; top: 0.5rem; right: 0.5rem; z-index: 100;"
+                        onclick="addProductToFavourite(event, {{ product.id }})"
+                        title="В избранное"
+                >
+                    <i class="fas fa-heart fa-lg"></i>
+                </button>
+                <!-- image caption container -->
+                <span class="font-main-light font-size-m text-white">Смотреть >></span>
+            </div><!-- end image caption container -->
+        </div><!-- end product-image-container -->
+        <div class="card-body py-2 d-flex flex-column justify-content-center light-bg">
+            <span class="color-grey50 font-main-light font-size-xs text-center">
+                {% if product.available %}
+                    в наличии
+                {% else %}
+                    под заказ
+                {% endif %}
+            </span>
+            <span class="font-main-narrow font-size-m color-grey60 text-center text-uppercase">
+                {{ product.name }}
+            </span>
+            <div class="d-flex justify-content-center pt-1">
+                <span class="font-main-narrow font-size-m color-grey60{% if product.prev_price %} main-color{% endif %}">
+                    {{ product.price }} руб.
+                </span>
+                {% if product.prev_price %}
+                    <span class="font-main-light font-size-s color-grey50" style="text-decoration: line-through;">
+                        {{ product.prev_price }} руб.
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </a>
+</div>
