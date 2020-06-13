@@ -1,5 +1,7 @@
-from .cart import Cart
+from session_object.service import SessionObjectService
 
 
-def cart(request):
-    return {'cart_items_number': 0}
+def cart_items_number(request):
+    service = SessionObjectService('cart')
+    cart = service.get_or_create(request)
+    return {'cart_items_number': cart.get_items_number()}

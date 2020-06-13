@@ -109,7 +109,7 @@ html, body {
 	width: 100%;
 	background: rgb(0, 0, 0);
 	background: rgba(0, 0, 0, .9);
-	z-index: 500;
+	z-index: 1050;
 	display: none;
 	cursor: pointer;
 }

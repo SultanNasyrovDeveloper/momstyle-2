@@ -41,11 +41,11 @@ class ProductPageSeo(PageSeo):
         return 'Seo для страницы товара {}'.format(self.product.name)
 
 
-def create_checklist(sender, **kwargs):
+def create_product_seo(sender, **kwargs):
     if kwargs.get('created', None):
         ProductPageSeo.objects.create(product=kwargs.get('instance'))
 
 
-post_save.connect(create_checklist, sender=Product)
+post_save.connect(create_product_seo, sender=Product)
 
 

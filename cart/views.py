@@ -6,8 +6,9 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 
 from seo.models import SitePageSeo
+from session_object.service import SessionObjectService
 
-# from .services import CartService
+from .serializers import CartItemSerializer
 
 
 class CartView(generic.View):
@@ -16,9 +17,29 @@ class CartView(generic.View):
         # cart = CartService.get_or_create(request)
         context = {
             'page_seo': seo,
-            'cart': CartService.serialize_cart(cart)
         }
         return render(request, 'cart.html', context)
+
+
+def add_item(request):
+    if request.method == 'POST':
+        post_data = json.loads(request.body)
+        service = SessionObjectService('cart')
+        cart = service.get_or_create(request)
+        serializer = CartItemSerializer(data=post_data)
+        if serializer.is_valid():
+            cart.add_item(serializer.save())
+            service.save(request, session_object=cart)
+            response = {
+                'text': 'Товар добавлен в корзину.',
+                'items_number': cart.get_items_number(),
+                'total_price': cart.get_total_price(),
+            }
+            return JsonResponse(response)
+        else:
+            raise Http404
+    else:
+        raise Http404()
 
 #
 # def cart(request):

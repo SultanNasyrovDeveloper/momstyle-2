@@ -32,7 +32,6 @@ INSTALLED_APPS = [
 
     'shop',
     'settings',
-    'blog',
     'seo',
 ]
 
@@ -59,8 +58,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',
+                'cart.context_processors.cart_items_number',
+                'favorites.context_processors.favorites_items_number',
                 'settings.context_processor.main',
+
             ],
         },
     },

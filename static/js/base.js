@@ -2,6 +2,7 @@ let nav = document.querySelector('.navbar');
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
 toastr.options.closeButton = true;
 toastr.options.closeMethod = 'fadeOut';
@@ -12,11 +13,9 @@ toastr.options.closeEasing = 'swing';
 function darkenNavbar () {
     TweenMax.to(nav, 1, {backgroundColor: '#808080'})
 }
-
 function lightenNavbar () {
     TweenMax.to(nav, 1, {backgroundColor: 'transparent'})
 }
-
 function activateNavbarColorChanger() {
     if (document.documentElement.scrollTop || document.body.scrollTop > window.innerHeight) darkenNavbar();
 
@@ -28,11 +27,18 @@ function activateNavbarColorChanger() {
         }
     });
 }
+function changeCartItemsNumber (newItemsNumber) {
+    $('.cart-items-number').text(newItemsNumber);
+}
+function changeFavoritesItemsNumber (newItemsNumber) {
+    $('.favorites-items-number').text(newItemsNumber)
+}
 
-function addProductToFavourite (event, productId) {
+async function addProductToFavourite (event, productId) {
     event.preventDefault();
     axios.post('favorites/add-item/', {id: productId})
         .then(response => {
+            changeFavoritesItemsNumber(response.data.items_number);
             toastr.success(response.data.text);
         })
         .catch(error => {

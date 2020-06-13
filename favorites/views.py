@@ -15,13 +15,13 @@ def add_item(request):
         favorites = service.get_or_create(request)
         item = FavoritesItem(product_id=post_data.get('id'))
         response = {
-            'text': 'Данный товар уже находится в избранном.'
+            'text': 'Данный товар уже находится в избранном.',
         }
         if item.product_id not in favorites:
             favorites.add_item(item)
             service.save(request, favorites)
             response['text'] = 'Товар добавлен в избранное.'
-        favorites = request.session['favorites']
+            response['items_number'] = favorites.get_items_number()
         return JsonResponse(response)
     else:
         raise Http404('Only post allowed')
