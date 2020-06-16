@@ -70,3 +70,24 @@ class OrderForm(forms.ModelForm):
         ]):
             raise forms.ValidationError('Выберите один из предложенных вариантов.')
         return data
+
+
+class QuickBuyForm(forms.Form):
+
+    first_name = forms.CharField(max_length=250, label="Имя")
+    phone_number = forms.CharField(max_length=50, label="Номер телефона")
+
+    first_name.widget.attrs.update(
+        {'class': 'form-control', 'placeholder': 'Введите имя'}
+    )
+    phone_number.widget.attrs.update(
+        {'class': 'form-control', 'type': 'tel', 'placeholder': 'Введите номер телефона'}
+    )
+
+    def save(self):
+        order = models.Order.objects.create(fast_buy=True)
+        personal = order.personal_info
+        personal.first_name = self.cleaned_data['first_name']
+        personal.phone_number = self.cleaned_data['phone_number']
+        personal.save()
+        return order

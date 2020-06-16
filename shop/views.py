@@ -1,11 +1,13 @@
-import json
 import random
 
-from django.shortcuts import render, Http404, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic
 
 from settings.models import Banner, DeliveryPaymentInfo
 from seo.models import SitePageSeo
+from order.forms import QuickBuyForm
+from order.models import OrderItem
 
 from .models import ProductCategory, Product
 from . import filters
@@ -34,7 +36,7 @@ class Index(generic.View):
             'banners': Banner.objects.all(),
             'categories': ProductCategory.objects.all(),
             'products': Product.displayed.all()[:6],
-            'page_seo': seo
+            'page_seo': seo,
         }
         return render(request, 'index.html', context)
 
@@ -52,9 +54,20 @@ class ProductListView(generic.View):
         return render(request, 'product_list.html', context)
 
 
-class Catalog(generic.View):
+class ProductQuickBuyView(generic.View):
 
-    page_name = 'Каталог'
+    def post(self, request, *args, **kwargs):
+        form = QuickBuyForm(request.POST)
+        product = Product.objects.get(id=kwargs.get('pk'))
+
+        if form.is_valid():
+            order = form.save()
+            OrderItem.objects.create(
+                order=order, product_id=product.id, product_name=product.name,
+            )
+            return redirect(reverse_lazy('order:complete'))
+        else:
+            return redirect(product.get_absolute_url())
 
 
 class Delivery(generic.View):
@@ -78,5 +91,6 @@ class ProductDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['suggestions'] = random_queryset(Product, 6, self.kwargs.get('pk'))
         context['page_seo'] = self.object.page_seo
+        context['quick_buy_form'] = QuickBuyForm()
         return context
 

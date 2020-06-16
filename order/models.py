@@ -18,7 +18,10 @@ class OrderItem(models.Model):
         return self.price * self.quantity
 
 
+
 class Order(models.Model):
+
+    fast_buy = models.BooleanField('В 1 клик', default=False,)
 
     no_connect = models.BooleanField('Без обратной связи', default=False, blank=True,)
     connect_by_phone = models.BooleanField('Связаться по телефону', default=False, blank=True)

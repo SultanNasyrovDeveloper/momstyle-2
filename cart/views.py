@@ -1,12 +1,14 @@
 import json
 
 from django.views import generic
-from django.shortcuts import render, Http404, HttpResponse
+from django.shortcuts import render, Http404, HttpResponse, redirect
+from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.http import JsonResponse
 
 from seo.models import SitePageSeo
 from session_object.service import SessionObjectService
+from order.forms import QuickBuyForm
 
 from .serializers import CartItemSerializer
 
@@ -19,8 +21,20 @@ class CartView(generic.View):
         context = {
             'page_seo': seo,
             'cart': service.serialize(cart),
+            'quick_buy_form': QuickBuyForm()
         }
         return render(request, 'cart.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = QuickBuyForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            service = SessionObjectService('cart')
+            session_cart = service.get_or_create(request)
+            order.parse_session_cart(session_cart)
+            return redirect(reverse_lazy('order:complete'))
+        else:
+            return redirect('cart')
 
 
 def add_item(request):

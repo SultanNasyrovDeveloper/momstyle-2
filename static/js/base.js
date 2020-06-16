@@ -47,6 +47,8 @@ async function addProductToFavourite (event, productId) {
 }
 
 $(document).ready(function () {
+    $("#id_phone_number").mask("+7 (999) 99 9999");
+
     const card = $('.product-card');
 
     card.mouseenter(function cardMouseEnter() {
