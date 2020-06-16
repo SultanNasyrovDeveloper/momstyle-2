@@ -1,0 +1,9 @@
+.active_tab{
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.5)!important;
+}
+
+.previous_tab{
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.3)!important;
+}

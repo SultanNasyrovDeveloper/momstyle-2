@@ -17,6 +17,10 @@ class SessionObjectService:
             request.session[self.object_name] = {'items': []}
         return self.deserialize(request.session[self.object_name])
 
+    def new(self, request):
+        request.session[self.object_name] = {'items': []}
+        request.session.modified = True
+
     def save(self, request, session_object) -> None:
         """
         Save cart to the session.
@@ -30,12 +34,19 @@ class SessionObjectService:
         Serialize session object instance.
         """
         serializer = self._get_serializer()
-        return serializer(session_object).data
+        if serializer:
+            return serializer(session_object).data
+        else:
+            return session_object
 
-    def deserialize(self, session_object_data) :
-        serializer = self._get_serializer()(data=session_object_data)
-        serializer.is_valid(raise_exception=True)
-        return serializer.save()
+    def deserialize(self, session_object_data):
+        serializer = self._get_serializer()
+        if serializer:
+            serializer = serializer(data=session_object_data)
+            serializer.is_valid(raise_exception=True)
+            return serializer.save()
+        else:
+            return session_object_data
 
     def _get_serializer(self):
         if self.object_name == 'cart':

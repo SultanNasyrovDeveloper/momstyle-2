@@ -4,13 +4,6 @@
         <div class="image-container">
             <img class="img-fluid main-img" src="{{ product.images.first.file.url }}" alt="">
             <div class="image-caption">
-                <button class="btn btn-transparent px-2 py-1 z-depth-0 text-white hover-main-color"
-                        style="position: absolute; top: 0.5rem; right: 0.5rem; z-index: 100;"
-                        onclick="addProductToFavourite(event, {{ product.id }})"
-                        title="В избранное"
-                >
-                    <i class="fas fa-heart fa-lg"></i>
-                </button>
                 <!-- image caption container -->
                 <span class="font-main-light font-size-m text-white">Смотреть >></span>
             </div><!-- end image caption container -->
@@ -36,6 +29,17 @@
                     </span>
                 {% endif %}
             </div>
+        </div>
+        <div class="card-footer d-flex justify-content-center border-0 light-bg p-0">
+            <a href="{{ product.get_absolute_url }}" class="btn btn-light px-3 py-2 z-depth-0 font-main-narrow color-grey60 hover-main-color h4-responsive">
+                В корзину
+            </a>
+            <button class="btn btn-light px-3 py-2 z-depth-0 font-main-narrow color-grey60 hover-main-color"
+                    onclick="addProductToFavourite(event, {{ product.id }})"
+                    title="В избранное"
+            >
+                <i class="fas fa-heart"></i>
+            </button>
         </div>
     </a>
 </div>

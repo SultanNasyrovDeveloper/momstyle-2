@@ -7,7 +7,7 @@ from django.views import generic
 from settings.models import Banner, DeliveryPaymentInfo
 from seo.models import SitePageSeo
 
-from .models import ProductCategory, Product, ContactPerson
+from .models import ProductCategory, Product
 from . import filters
 
 

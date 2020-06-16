@@ -1,0 +1,30 @@
+{% extends 'checkout_base.html' %}
+{% load static %}
+
+
+{% block checkout_content %}
+    <form method="post" id="delivery-form">
+        {% csrf_token %}
+        <small v-if="!isValid" class="text-danger">{{ form.non_field_errors }}</small>
+        {% for field in form %}
+            <div class="form-group">
+                <label class="font-size-l font-main-light">{{ field.label }}</label>
+                {{ field }}
+                <small v-if="!isValid" class="text-danger">{{ field.errors }}</small>
+            </div>
+        {% endfor %}
+    </form>
+{% endblock %}
+
+{% block next_button %}
+    <input type="submit" form="delivery-form">
+{% endblock %}
+
+{% block js %}
+    <script>
+        darkenNavbar();
+        setCurrentTab(2);
+        $("#id_index").mask("999 999");
+    </script>
+
+{% endblock %}

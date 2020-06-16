@@ -27,6 +27,7 @@
 {#    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>#}
 
     <!-- bootstrap 4 css -->
+    <script src="{% static 'plugins/vue.js' %}"></script>
     <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'plugins/mdb.css' %}">
@@ -96,19 +97,11 @@
                 <li>
                     <a href="{% url 'about' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">О нас</a>
                 </li>
+                <li>
+                    <a href="" class="font-main-light text-white text-uppercase mx-2 font-size-s">Избранное</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end h-100">
-                <li class="nav-item d-flex align-items-center mr-2">
-                    <a href="" class="d-flex h-100" >
-                        <i class="fas fa-heart text-white"></i>
-                        <span class="favorites-items-number align-self-start d-flex justify-content-center
-                                       align-items-center main-color-bg font-main-light font-size-s text-white ml-1"
-                              style="position: relative; margin-top: -0.5rem;"
-                        >
-                            {{ favorites_items_number }}
-                        </span>
-                    </a>
-                </li>
                 <li class="nav-item d-flex align-items-center">
                     <a href="{% url 'cart:cart' %}" class="d-flex h-100">
                         <!-- cart icon -->
@@ -197,6 +190,10 @@
     <script src="{% static 'js/base.js' %}"></script>
 
     {% block script %}
+
+    {% endblock %}
+
+    {% block js %}
 
     {% endblock %}
 

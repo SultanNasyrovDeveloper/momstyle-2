@@ -29,7 +29,6 @@ body{
     letter-spacing: 0.05rem;
 }
 
-
 .main-color{
     color: #ed7e7c !important;
 }
@@ -37,6 +36,9 @@ body{
     color: rgba(0, 0, 0, 0.5);
 }
 .color-grey60{
+    color: rgba(0, 0, 0, 0.6);
+}
+.color-hover-grey60:hover{
     color: rgba(0, 0, 0, 0.6);
 }
 
@@ -47,10 +49,31 @@ body{
 .hover-main-color:hover{
     color: #ed7e7c !important;
 }
-
 .main-color-bg{
     background-color: #ed7e7c;
 }
 .light-bg{
     background-color: rgba(0, 0, 0, 0.03);
+}
+
+.font-size-s{
+    font-size: 0.7rem;
+}
+
+
+.font-size-m {
+    font-size: 0.8rem;
+}
+
+.font-size-l {
+    font-size: 1rem;
+}
+
+
+.small{
+    font-size: 80% !important;
+}
+
+.pointer{
+    cursor: pointer;
 }
