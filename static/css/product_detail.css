@@ -132,19 +132,19 @@
     color: rgba(0, 0, 0, 0.61);
 }
 
-/*#quantity-select{*/
-    /*height: 3rem;*/
-    /*width: 3rem;*/
+#quantity-select{
+    height: 3rem;
+    width: 3rem;
 
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    /*border-radius: 3px;*/
+    border-radius: 3px;
 
-    /*font-family: 'Main light', sans-serif;*/
-    /*color: rgba(0, 0, 0, 0.6);*/
-/*}*/
+    font-family: 'Main light', sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+}
 
 /*.sizes-table-link{*/
     /*font-family: 'Main light', sans-serif;*/

@@ -29,27 +29,27 @@
             <div class="col-12 col-md-8">
                 <div>
                     {% for category in target.category.all %}
-                        <a class="category" href="{% url 'product_list' %}?category={{ category.id }}">
+                        <a class="font-main-light font-size-s color-grey50" href="{% url 'product_list' %}?category={{ category.id }}">
                             {{ category.name }}
                         </a>
                     {% endfor %}
                 </div>
                 <div>
-                    <h1 class="name">{{ target.name }}</h1>
+                    <h1 class="secondary-font display-4 color-grey60">{{ target.name }}</h1>
                 </div>
                 <div>
-                    <span class="help-text">Состав: <span class="material">{{ target.material }}</span></span>
+                    <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Состав:</span>
+                    <span class="font-size-m font-main-light color-grey60 text-uppercase">{{ target.material }}</span>
                 </div>
-                <div>
-                    <span class="help-text">
-                        Рост модели: <span class="model-height">{{ target.models_height }} см</span>
-                    </span>
+                <div class="mb-2">
+                    <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Рост модели:</span>
+                    <span class="font-size-m font-main-light color-grey60 text-uppercase">{{ target.models_height }} см</span>
                 </div>
                 <div>
                     {% if target.available %}
-                        <div class="size-buttons">
+                        <div class="d-flex mb-3">
                             {% for size in target.sizes.all %}
-                                <button class="size{% if forloop.counter == 1 %} chosen{% endif %}">{{ size.name }}</button>
+                                <button class="size{% if forloop.counter == 1 %} chosen{% endif %} mr-1">{{ size.name }}</button>
                             {% endfor %}
 
                             <select name="quantity" id="quantity-select">
@@ -65,38 +65,44 @@
                                 <option value="10" class="quantity-option">10</option>
                             </select>
                         </div><!-- end size buttons container -->
-                        {% if main.sizes_table %}
-                            <a class="sizes-table-link" href="#">Таблица Размеров</a>
-                        {% endif %}
                     {% else %}
-                        Данного товара нет.
+                        Данного товара нет в наличии.
                     {% endif %}
                 </div>
 
-                <div class="">
+                <div class="mt-3">
                     {% if target.available %}
                         <button id="add-to-cart" onclick="addItemToCart(event, {{ target.id }});
                                 {#ym(56194840, 'reachGoal', 'add_basket'); return true; #}
-                                ">
+                                " class="ml-0 btn btn-light font-main-narrow z-depth-0 color-grey60 font-size-m text-uppercase hover-main-color">
                             В корзину
                         </button>
-                        <a href="{% url 'cart:cart' %}" class="d-none" id="go-to-cart">Перейти в корзину</a>
-                        <button onclick="$('#buy-quick-product').modal('toggle')">Купить в 1 клик</button>
+                        <a href="{% url 'cart:cart' %}"
+                           class="d-none btn btn-light font-main-narrow z-depth-0 color-grey60 font-size-m text-uppercase"
+                           id="go-to-cart"
+                        >
+                            Перейти в корзину
+                        </a>
+                        <button onclick="$('#buy-quick-product').modal('toggle')"
+                        class="btn light-bg font-main-narrow z-depth-0 color-grey50 font-size-m text-uppercase color-hover-grey60"
+                        >Купить в 1 клик</button>
                     {% else %}
-                        <a href="">Заказать пошив</a>
+                        <button class="ml-0 btn btn-light font-main-narrow z-depth-0 color-grey60 font-size-m text-uppercase hover-main-color"
+                            onclick="$('#buy-quick-product').modal('toggle')"
+                        >Заказать пошив</button>
                     {% endif %}
 
                 </div>
-                <div>
-                    <p class="description">{{ target.description }}</p>
+                <div class="my-3">
+                    <p class="font-main-light font-size-l color-grey60">{{ target.description }}</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid px-1 px-sm-2 px-md-5">
+    <div class="container-fluid px-1 px-sm-2 px-md-5 py-3">
         <div class="d-flex">
-            <h2>Вам также может понравится</h2>
+            <h2 class="secondary-font h2 color-grey60">Вам также может понравится</h2>
         </div>
         <div class="row d-flex justify-content-center">
             {% for product in suggestions %}

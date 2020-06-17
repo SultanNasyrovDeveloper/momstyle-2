@@ -26,7 +26,9 @@ class FavoritesView(generic.View):
             'filter': ProductFilter(request.GET, queryset=Product.displayed.filter(
                 id__in=[item.product_id for item in favorites.items]
             )),
-            'is_favorites': True
+            'is_favorites': True,
+            'min_price': Product.objects.order_by('price').first().price,
+            'max_price': Product.objects.order_by('-price').first().price
         }
         return render(request, 'product_list.html', context)
 

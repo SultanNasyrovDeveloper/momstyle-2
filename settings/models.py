@@ -44,16 +44,19 @@ class SiteMain(models.Model):
     product_h2 = models.CharField(max_length=100, null=True, blank=True, verbose_name='Название блока продукты')
     product_par = models.CharField(max_length=300, null=True, blank=True, verbose_name='Описание блока продукты')
 
-    vk_url = models.URLField(blank=True, null=True, verbose_name='Ссылка на страницу вк')
-    insta_url = models.URLField(blank=True, null=True, verbose_name='Ссылка на страницу инстаграм')
     phone_number = models.CharField(max_length=20, verbose_name='Номер телефона', null=True, blank=True)
     email = models.EmailField(null=True, blank=True, verbose_name='Электронный адрес')
-    address = models.CharField(max_length=500, null=True, blank=True, verbose_name='Адрес')
+    address = models.CharField(max_length=500, null=True, blank=True, verbose_name='Адрес (через запятую)')
     working_hours = models.CharField(max_length=100, null=True, blank=True, verbose_name='Часы работы')
     delivery_header_image = models.ImageField(upload_to='header_images/', verbose_name='Изображение страницы доставка',
                                               null=True, blank=True)
     about_header_image = models.ImageField(upload_to='header_images/', verbose_name='Изображение страницы о нас',
                                            null=True, blank=True)
+
+    organisation_line1 = models.CharField(max_length=150, default='', blank=True, verbose_name='Организация(строка 1)')
+    organisation_line2 = models.CharField(max_length=150, default='', blank=True, verbose_name='Организация(строка 2)')
+    organisation_line3 = models.CharField(max_length=150, default='', blank=True, verbose_name='Организация(строка 3)')
+    organisation_line4 = models.CharField(max_length=150, default='', blank=True, verbose_name='Организация(строка 4)')
 
     class Meta:
         verbose_name = 'Настройки сайта'
@@ -62,6 +65,15 @@ class SiteMain(models.Model):
     def __str__(self):
         return 'Настройки'
 
+    def addresses(self):
+        if self.address:
+            return self.address.split(', ')
+
+
+class SocialLink(models.Model):
+    name = models.CharField(max_length=50,)
+    active = models.BooleanField(default=False, verbose_name='Доступна')
+    link = models.CharField(max_length=250, verbose_name='Ссылка или номер', default='')
 
 
 

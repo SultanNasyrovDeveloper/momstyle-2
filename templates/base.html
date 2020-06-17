@@ -114,7 +114,6 @@
                         <i class="fas fa-shopping-cart text-white align-self-center"></i>
                         <span class="cart-items-number align-self-start d-flex justify-content-center
                                     align-items-center main-color-bg font-main-light font-size-s text-white ml-1"
-                              style="position: relative; margin-top: -0.5rem;"
                         >
                             {{ cart_items_number }}
                         </span>
@@ -129,48 +128,51 @@
 
     {% endblock %}
 
-    <footer class="page-footer mt-5 bg-secondary mt-auto">
+    <footer class="page-footer mt-5 mt-auto">
 
         <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left px-1 px-sm-2 px-md-5">
+        <div class="container-fluid text-center text-md-left px-1 px-sm-2 px-md-5 dark-bg2">
 
             <!-- Grid row -->
             <div class="row">
 
+                <div class="col-12 d-flex justify-content-center py-3">
+                    Icons
+                </div>
+
                 <!-- Grid column -->
-                <div class="col-md-3 mt-3">
-                    <span class="column-header">Контакты:</span>
-                    <div class="contact-line"><i class="icon-iphone"></i>{{ main.phone_number }}</div><!-- end phone line -->
-                    <div class="contact-line"><i class="icon-envelop4"></i>{{ main.email }}</div><!-- end phone line -->
-                    <div class="contact-line"><i class="icon-location3"></i>{{ main.address }}</div><!-- end phone line -->
-                    <div class="contact-line"><i class="icon-watch2"></i>{{ main.working_hours }}</div><!-- end phone line -->
+                <div class="col-md-3 py-3 d-flex flex-column">
+                    <span class="font-main-narrow font-size-m text-uppercase my-2">Контакты:</span>
+                    <div class="font-main-light font-size-m"><i class="fas fa-mobile-alt mr-2"></i>{{ main.phone_number }}</div><!-- end phone line -->
+                    <div class="font-main-light font-size-m"><i class="fas fa-envelope mr-2"></i>{{ main.email }}</div><!-- end phone line -->
+                    {% for address in main.addresses %}
+                        <div class="font-main-light font-size-m"><i class="fas fa-map-marker-alt mr-2"></i>{{ address }}</div><!-- end phone line -->
+                    {% endfor %}
+
+                    <div class="font-main-light font-size-m"><i class="fas fa-clock mr-2"></i>{{ main.working_hours }}</div><!-- end phone line -->
                 </div>
                 <!-- Grid column -->
 
-                <hr class="clearfix w-100 d-md-none pb-3">
-
                 <!-- Grid column -->
-                <div class="col-md-3 mt-3">
-                    <span class="column-header">Ссылки:</span>
-                    <a href="{% url 'index' %}" class="footer-link">- Главная</a>
-                    <a href="{% url 'product_list' %}" class="footer-link">- Каталог</a>
-                    <a href="{% url 'delivery' %}" class="footer-link">- Доставка</a>
-                    <a href="" class="footer-link">- О нас</a>
-
+                <div class="col-md-3 py-3 d-flex flex-column">
+                    <span  class="font-main-narrow font-size-m text-uppercase my-2">Ссылки:</span>
+                    <a href="{% url 'index' %}" class="font-main-light font-size-m">- Главная</a>
+                    <a href="{% url 'product_list' %}" class="font-main-light font-size-m">- Каталог</a>
+                    <a href="{% url 'delivery' %}" class="font-main-light font-size-m">- Доставка</a>
+                    <a href="{% url 'about' %}" class="font-main-light font-size-m">- О нас</a>
+                    <a href="{% url 'favorites:favorites' %}" class="font-main-light font-size-m">- Избранное</a>
                 </div>
 
-                <div class="col-md-3 mb-3">
-                    <span class="column-header">Связаться с нами:</span>
-
-                    <form action="" class="contact-us">
-                        <input type="text" class="contact-name" placeholder="Ваше имя" required>
-                        <input type="text" class="contact-phone" placeholder="+7 (900) 000-0000" required>
-                        <button type="submit" class="contact-us-btn">Отправить</button>
-                    </form>
+                <div class="col-md-3 py-3 d-flex flex-column">
+                    <span class="font-main-narrow font-size-m text-uppercase my-2">Организация:</span>
+                    <span class="font-main-light font-size-m">{{ main.organisation_line1 }}</span>
+                    <span class="font-main-light font-size-m">{{ main.organisation_line2 }}</span>
+                    <span class="font-main-light font-size-m">{{ main.organisation_line3 }}</span>
+                    <span class="font-main-light font-size-m">{{ main.organisation_line4 }}</span>
                 </div>
 
-                <div class="col-md-3 mb-3">
-                    <div class="up">
+                <div class="col-md-3 py-3">
+                    <div class="up rounded-circle">
                     <!-- up button -->
                         <i class="material-icons text-white">arrow_circle_up</i>
                     </div><!-- end up button -->
@@ -179,14 +181,14 @@
             </div>
             <!-- Grid row -->
         </div>
-        <div class="footer-copyright text-center py-3">© <span class="current-year"></span> Copyright: ИП. Юшков</div>
+        <div class="footer-copyright dark-bg text-center py-3">© <span class="current-year"></span> Copyright: ИП. Юшков</div>
     </footer>
 
     <div class="modal fade" id="buy-quick-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Купить товар в 1 клик</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Форма заказа</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -226,7 +228,5 @@
     {% block js %}
 
     {% endblock %}
-
-
 </body>
 </html>

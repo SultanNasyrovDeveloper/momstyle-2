@@ -50,6 +50,8 @@ class ProductListView(generic.View):
         context = {
             'filter': filters.ProductFilter(request.GET, queryset=Product.displayed.all()),
             'seo': seo,
+            'min_price': Product.objects.order_by('price').first().price,
+            'max_price': Product.objects.order_by('-price').first().price
         }
         return render(request, 'product_list.html', context)
 

@@ -33,7 +33,7 @@ body{
     color: #ed7e7c !important;
 }
 .color-grey50{
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5) !important;
 }
 .color-grey60{
     color: rgba(0, 0, 0, 0.6);
@@ -55,11 +55,17 @@ body{
 .light-bg{
     background-color: rgba(0, 0, 0, 0.03);
 }
+.dark-bg{
+    background-color: #808080 !important;
+}
+
+.dark-bg2{
+    background-color: #8b8b8b !important;
+}
 
 .font-size-s{
     font-size: 0.7rem;
 }
-
 
 .font-size-m {
     font-size: 0.8rem;
