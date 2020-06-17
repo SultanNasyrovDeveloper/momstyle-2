@@ -85,11 +85,12 @@
 
                 <div class="">
                     {% if target.available %}
-                        <button onclick="addItemToCart(event, {{ target.id }});
+                        <button id="add-to-cart" onclick="addItemToCart(event, {{ target.id }});
                                 {#ym(56194840, 'reachGoal', 'add_basket'); return true; #}
                                 ">
                             В корзину
                         </button>
+                        <a href="{% url 'cart:cart' %}" class="d-none" id="go-to-cart">Перейти в корзину</a>
                         <button onclick="$('#buy-quick-product').modal('toggle')">Купить в 1 клик</button>
                     {% else %}
                         <a href="">Заказать пошив</a>
@@ -138,9 +139,9 @@
 
     </section><!-- end sizes table layout -->
 
+{% endblock %}
 
-
-    {% block quick_buy_form %}
+{% block quick_buy_form %}
         <form action="{% url 'product_quick_buy' target.id %}" method="post" id="quick-buy-form">
             {% csrf_token %}
             {{ quick_buy_form.as_p }}
@@ -148,14 +149,10 @@
     {% endblock %}
 
 
-{% endblock %}
-
-
 {% block script %}
     <!-- product_detail.css -->
     <script src="{% static 'js/product_detail.js' %}"></script>
     <!-- product image handling plugin -->
     <script src="{% static 'plugins/Smoothproducts-master/js/smoothproducts.js' %}"></script>
-
 
 {% endblock %}

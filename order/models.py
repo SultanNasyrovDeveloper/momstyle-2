@@ -12,11 +12,14 @@ class OrderItem(models.Model):
     product_name = models.CharField(max_length=1000, verbose_name='Название продукта')
     size = models.CharField(max_length=50, verbose_name='Размер')
     price = models.PositiveIntegerField(default=0, verbose_name='Цена')
-    quantity = models.PositiveSmallIntegerField(default=1)
+    quantity = models.PositiveSmallIntegerField(default=1, verbose_name='Количество')
+
+    @property
+    def total_price(self):
+        return self.get_total_price()
 
     def get_total_price(self):
         return self.price * self.quantity
-
 
 
 class Order(models.Model):
@@ -36,6 +39,10 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Заказ {self.id} от {self.created}'
+
+    @property
+    def total_price(self):
+        return self.get_total_price()
 
     def parse_session_cart(self, session_cart):
         for item in session_cart.items:
@@ -68,7 +75,7 @@ class Order(models.Model):
     def get_total_price(self):
         return sum([
             item.get_total_price() for item in self.items.all()
-        ])
+        ]) + self.delivery.price
 
 
 class OrderPersonalInformation(models.Model):
@@ -90,6 +97,7 @@ class OrderDeliveryInformation(models.Model):
         'delivery.DeliveryMethod', on_delete=models.SET_NULL, null=True, blank=True,
         verbose_name='Метод доставки',
     )
+    price = models.IntegerField('Стоимость', default=0)
     index = models.CharField(max_length=10, verbose_name='Индекс', default='')
     city = models.CharField(max_length=500, verbose_name='Населенный пункт (город)', default='')
     street = models.CharField(max_length=500, verbose_name='Улица', default='')

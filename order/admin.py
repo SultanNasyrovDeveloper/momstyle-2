@@ -3,10 +3,30 @@ from django.contrib import admin
 from . import models
 
 
-class OrderItemAdmin(admin.TabularInline):
+class OrderItemAdminInline(admin.TabularInline):
     model = models.OrderItem
+    extra = 0
+    readonly_fields = ('total_price', )
+
+
+class OrderPersonalInfoInline(admin.TabularInline):
+    model = models.OrderPersonalInformation
+
+
+class OrderPaymentInformationInline(admin.TabularInline):
+    model = models.OrderPaymentInformation
+
+
+class OrderDeliveryInformationInline(admin.TabularInline):
+    model = models.OrderDeliveryInformation
 
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    inlines = (OrderItemAdmin, )
+    readonly_fields = ('total_price', )
+    inlines = (
+        OrderPaymentInformationInline,
+        OrderDeliveryInformationInline,
+        OrderPaymentInformationInline,
+        OrderItemAdminInline,
+    )

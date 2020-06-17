@@ -98,7 +98,7 @@
                     <a href="{% url 'about' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s nowrap">О нас</a>
                 </li>
                 <li>
-                    <a href="" class="font-main-light text-white text-uppercase mx-2 font-size-s">Избранное</a>
+                    <a href="{% url 'favorites:favorites' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Избранное</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav w-100 ml-auto justify-content-end">
@@ -118,30 +118,6 @@
             </ul>
         </div>
     </nav>
-
-    <div class="modal fade" id="buy-quick-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Купить товар в 1 клик</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    {% block quick_buy_form %}
-
-                    {% endblock %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" form="quick-buy-form"
-                           class="btn bg-light color-grey60 hover-main-color z-depth-0 font-size-m font-main-narrow">
-                </div>
-            </div>
-        </div>
-    </div>
 
     {% block content %}
 
@@ -199,6 +175,30 @@
         </div>
         <div class="footer-copyright text-center py-3">© <span class="current-year"></span> Copyright: ИП. Юшков</div>
     </footer>
+
+    <div class="modal fade" id="buy-quick-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Купить товар в 1 клик</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    {% block quick_buy_form %}
+
+                    {% endblock %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" form="quick-buy-form"
+                           class="btn bg-light color-grey60 hover-main-color z-depth-0 font-size-m font-main-narrow">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="{% static 'plugins/jquery.js' %}"></script>
     <script src="{% static 'plugins/gsap/TweenMax.min.js' %}"></script>

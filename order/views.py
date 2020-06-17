@@ -36,7 +36,8 @@ class OrderPersonalInfoCheckoutView(generic.View):
         form = forms.OrderPersonalInformationForm(initial=initial)
         context = {
             'page_seo': seo,
-            'form': form
+            'form': form,
+            'order': order_data,
         }
         return context
 
@@ -74,6 +75,7 @@ class OrderDeliveryCheckoutView(generic.View):
             'street': order_data.get('street', None),
             'building_number': order_data.get('building_number', None),
             'apartment': order_data.get('apartment', None),
+            'order': order_data,
         }
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         form = forms.OrderDeliveryForm(initial=initial)
@@ -107,6 +109,8 @@ class OrderPaymentCheckoutView(generic.View):
 
     def get_context_data(self, request):
         service = SessionObjectService('order')
+        cart_service = SessionObjectService('cart')
+        cart = cart_service.get_or_create(request)
         order_data = service.get_or_create(request)
         initial = {
             'payment_method': order_data.get('payment_method', None),
@@ -114,9 +118,14 @@ class OrderPaymentCheckoutView(generic.View):
         }
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         form = forms.OrderPaymentMethodForm(initial=initial)
+        delivery_method = DeliveryMethod.objects.get(id=order_data.get('delivery_method'))
         context = {
             'page_seo': seo,
-            'form': form
+            'form': form,
+            'order': order_data,
+            'delivery_method': delivery_method,
+            'order_total_price': cart.get_total_price() + delivery_method.price
+
         }
         return context
 
@@ -143,16 +152,20 @@ class OrderCheckoutView(generic.View):
     page_name = 'Оформление заказа: способ оплаты'
 
     def get_context_data(self, request):
-        service = SessionObjectService('order')
-        order = service.get_or_create(request)
+        order_service = SessionObjectService('order')
+        cart_service = SessionObjectService('cart')
+        cart = cart_service.get_or_create(request)
+        order = order_service.get_or_create(request)
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
+        delivery_method = DeliveryMethod.objects.get(id=order.get('delivery_method'))
         form = forms.OrderForm()
         context = {
             'page_seo': seo,
             'form': form,
             'order': order,
             'payment_method': PaymentMethod.objects.get(id=order.get('payment_method')),
-            'delivery_method': DeliveryMethod.objects.get(id=order.get('delivery_method'))
+            'delivery_method': delivery_method,
+            'order_total_price': cart.get_total_price() + delivery_method.price
         }
         return context
 

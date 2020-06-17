@@ -34,12 +34,21 @@
             <a href="{{ product.get_absolute_url }}" class="btn btn-light px-3 py-2 z-depth-0 font-main-narrow color-grey60 hover-main-color h4-responsive">
                 В корзину
             </a>
-            <button class="btn btn-light px-3 py-2 z-depth-0 font-main-narrow color-grey60 hover-main-color"
-                    onclick="addProductToFavourite(event, {{ product.id }})"
-                    title="В избранное"
-            >
-                <i class="fas fa-heart"></i>
-            </button>
+
+            {% if is_favorites %}
+                <button class="remove_favorite btn btn-light px-2 py-2 z-depth-0 color-grey60 hover-main-color"
+                    data-product-id="{{ product.id }}"
+                >
+                    <i class="fas fa-trash"></i>
+                </button>
+            {% else %}
+                 <button class="favorite_btn btn btn-light px-2 py-2 z-depth-0 {% if product.id in favorites %} main-color {% else %} color-grey60 hover-main-color{% endif %}"
+                    data-product-id="{{ product.id }}"
+                >
+                    <i class="fas fa-heart"></i>
+                </button>
+            {% endif %}
+
         </div>
     </a>
 </div>

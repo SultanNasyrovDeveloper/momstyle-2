@@ -67,7 +67,10 @@
                     <div class="col-4">
                         <div class="card z-depth-0 light-bg">
                             <div class="py-3">Итого</div>
-                            <div class="py-3">16000руб</div>
+                            <div class="py-3">Товары: {{ cart_total_price }}руб</div>
+
+                            <div class="py-3">Доставка: {% if delivery_method %}{{ delivery_method.price }}руб{% else %}Не указано{% endif %}</div>
+                            <div class="py-3">Всего: {% if order_total_price %}{{ order_total_price }}{% else %}{{ cart_total_price }}{% endif %}руб</div>
                             <hr/>
                             {% block next_button %}
                                 <button>Далее</button>

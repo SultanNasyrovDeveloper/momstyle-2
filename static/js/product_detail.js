@@ -12,6 +12,8 @@ async function addItemToCart (event, productId) {
             const data = response.data;
             changeCartItemsNumber(data.items_number);
             toastr.success(data.text);
+            $('#add-to-cart').addClass('d-none');
+            $('#go-to-cart').removeClass('d-none');
         })
         .catch(error => {
             toastr.error('При добавлении товара в корзину произошла ошибка.')
@@ -38,26 +40,8 @@ $(document).ready(function () {
     sizeButton.click(function () {
         $(this).toggleClass('chosen');
         $(this).siblings().removeClass('chosen');
-    });
-
-
-
-    // recommendation product cards hover effect handling
-    product.mouseenter(function () {
-        cardMouseEnter($(this));
-    });
-    product.mouseleave(function () {
-        cardMouseLeave($(this))
-    });
-
-    // handling size table
-    $('.sizes-table-link').click(function (e) {
-        e.preventDefault();
-        sizesLayout.css('display', 'block');
-    });
-
-    $('.close').click(function () {
-        sizesLayout.css('display', 'none');
+        $('#add-to-cart').removeClass('d-none');
+        $('#go-to-cart').addClass('d-none');
     });
 
 });

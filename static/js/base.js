@@ -34,18 +34,6 @@ function changeFavoritesItemsNumber (newItemsNumber) {
     $('.favorites-items-number').text(newItemsNumber)
 }
 
-async function addProductToFavourite (event, productId) {
-    event.preventDefault();
-    axios.post('favorites/add-item/', {id: productId})
-        .then(response => {
-            changeFavoritesItemsNumber(response.data.items_number);
-            toastr.success(response.data.text);
-        })
-        .catch(error => {
-            toastr.error('При добавлении товара в избранное произошла ошибка.')
-        })
-}
-
 $(document).ready(function () {
     $("#id_phone_number").mask("+7 (999) 99 9999");
 
@@ -65,4 +53,41 @@ $(document).ready(function () {
         TweenMax.to(imageCaption, 0.5, {opacity: 0});
         TweenMax.to(image, 3, {scale: 1});
     });
+
+    $('.favorite_btn').on('click', function (event) {
+        event.preventDefault();
+        const target = $(this);
+        const productId = target.attr('data-product-id');
+        axios.post('favorites/toggle-item/', {id: productId})
+            .then(response => {
+                toastr.success(response.data.text);
+                if (response.data.status === 200) {
+                    target.addClass('main-color');
+                    target.removeClass('color-grey60 hover-main-color');
+                } else {
+                    target.removeClass('main-color');
+                    target.addClass('color-grey60 hover-main-color');
+                }
+            })
+            .catch(error => {
+                toastr.error('При добавлении товара в избранное произошла ошибка.')
+            })
+    });
+
+    $('.remove_favorite').on('click', function(event) {
+        event.preventDefault();
+        const productId = $(this).attr('data-product-id');
+        axios.post('favorites/toggle-item/', {id: productId})
+            .then(response => {
+                debugger;
+                toastr.success(response.data.text);
+                if (response.data.status === 201) {
+                    const product = $(this).closest('.col');
+                    product.addClass('d-none');
+                };
+            })
+            .catch(error => {
+                toastr.error('При добавлении товара в избранное произошла ошибка.')
+            })
+    })
 });
