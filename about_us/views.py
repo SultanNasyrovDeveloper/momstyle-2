@@ -14,6 +14,6 @@ class AboutUsView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
-        context['page_seo'] = seo
+        context['seo'] = seo
         context['blocks'] = models.AboutUsBlock.objects.all()
         return context

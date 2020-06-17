@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block meta %}
-    <title>{{ page_seo.title }}</title>
-    <meta name="description" content="{{ page_seo.description }}">
-    <meta name="keywords" content="{{ page_seo.keywords }}">
-
-    {{ page_seo.additional|safe }}
-
-{% endblock %}
-
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">

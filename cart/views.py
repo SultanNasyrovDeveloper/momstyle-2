@@ -19,7 +19,7 @@ class CartView(generic.View):
         service = SessionObjectService('cart')
         cart = service.get_or_create(request)
         context = {
-            'page_seo': seo,
+            'seo': seo,
             'cart': service.serialize(cart),
             'quick_buy_form': QuickBuyForm()
         }

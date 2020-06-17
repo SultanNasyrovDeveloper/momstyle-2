@@ -36,7 +36,7 @@ class Index(generic.View):
             'banners': Banner.objects.all(),
             'categories': ProductCategory.objects.all(),
             'products': Product.displayed.all()[:6],
-            'page_seo': seo,
+            'seo': seo,
         }
         return render(request, 'index.html', context)
 
@@ -49,7 +49,7 @@ class ProductListView(generic.View):
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         context = {
             'filter': filters.ProductFilter(request.GET, queryset=Product.displayed.all()),
-            'page_seo': seo,
+            'seo': seo,
         }
         return render(request, 'product_list.html', context)
 
@@ -77,7 +77,7 @@ class Delivery(generic.View):
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         context = {
             'info': DeliveryPaymentInfo.objects.all(),
-            'page_seo': seo
+            'seo': seo
         }
         return render(request, 'delivery.html', context)
 
@@ -90,7 +90,7 @@ class ProductDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['suggestions'] = random_queryset(Product, 6, self.kwargs.get('pk'))
-        context['page_seo'] = self.object.page_seo
+        context['seo'] = self.object.page_seo
         context['quick_buy_form'] = QuickBuyForm()
         return context
 

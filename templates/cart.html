@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block meta %}
-    <title>{{ page_seo.title }}</title>
-    <meta name="description" content="{{ page_seo.description }}">
-    <meta name="keywords" content="{{ page_seo.keywords }}">
-
-    {{ page_seo.additional|safe }}
-
-{% endblock %}
-
 
 {% block css %}
     <!-- cart.css -->
@@ -20,18 +11,14 @@
 
 {% block content %}
 
-    <section class="container-fluid px-5" style="margin-top: 6rem">
-
-    </section>
-
     <section>
-        <div class="container-fluid px-5">
+        <div class="container-fluid px-5"  style="margin-top: 6rem">
             <div class="row">
                 <div class="col-12 col-md-8 p-2">
                     <div class="card cart-items z-depth-0">
                         <div class="card-body">
                             <div>
-                                <h1 class="secondary-font font-size-xxl color-grey60">Корзина</h1>
+                                <h1 class="secondary-font font-size-xxl color-grey60">{{ seo.h1 }}</h1>
                             </div>
                             {% for item in cart.items %}
                                 <div class="container-fluid light-bg my-1 p-2 cart-item"

@@ -35,7 +35,7 @@ class OrderPersonalInfoCheckoutView(generic.View):
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         form = forms.OrderPersonalInformationForm(initial=initial)
         context = {
-            'page_seo': seo,
+            'seo': seo,
             'form': form,
             'order': order_data,
         }
@@ -80,7 +80,7 @@ class OrderDeliveryCheckoutView(generic.View):
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         form = forms.OrderDeliveryForm(initial=initial)
         context = {
-            'page_seo': seo,
+            'seo': seo,
             'form': form
         }
         return context
@@ -120,7 +120,7 @@ class OrderPaymentCheckoutView(generic.View):
         form = forms.OrderPaymentMethodForm(initial=initial)
         delivery_method = DeliveryMethod.objects.get(id=order_data.get('delivery_method'))
         context = {
-            'page_seo': seo,
+            'seo': seo,
             'form': form,
             'order': order_data,
             'delivery_method': delivery_method,
@@ -160,7 +160,7 @@ class OrderCheckoutView(generic.View):
         delivery_method = DeliveryMethod.objects.get(id=order.get('delivery_method'))
         form = forms.OrderForm()
         context = {
-            'page_seo': seo,
+            'seo': seo,
             'form': form,
             'order': order,
             'payment_method': PaymentMethod.objects.get(id=order.get('payment_method')),

@@ -9,7 +9,7 @@ class OrderItemAdminInline(admin.TabularInline):
     readonly_fields = ('total_price', )
 
 
-class OrderPersonalInfoInline(admin.TabularInline):
+class OrderPersonalInfoInline(admin.StackedInline):
     model = models.OrderPersonalInformation
 
 
@@ -17,7 +17,7 @@ class OrderPaymentInformationInline(admin.TabularInline):
     model = models.OrderPaymentInformation
 
 
-class OrderDeliveryInformationInline(admin.TabularInline):
+class OrderDeliveryInformationInline(admin.StackedInline):
     model = models.OrderDeliveryInformation
 
 

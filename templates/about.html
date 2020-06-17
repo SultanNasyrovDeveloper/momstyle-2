@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block meta %}
-    <title>{{ page_seo.title }}</title>
-    <meta name="description" content="{{ page_seo.description }}">
-    <meta name="keywords" content="{{ page_seo.keywords }}">
-
-    {{ page_seo.additional|safe }}
-
-{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'plugins/fotorama.css' %}">
@@ -20,7 +12,7 @@
 {% block content %}
     <div class="container-fluid px-5" style="margin-top: 6rem">
         <div class="">
-            <h1>О нас</h1>
+            <h1>{{ seo.h1 }}</h1>
         </div>
         {% for page_block in blocks  %}
             <div class="container-fluid p-0 my-5">
