@@ -11,10 +11,7 @@ function changeCartTotalPrice(newTotalPrice) {
 
 function changeItemTotalPrice(itemId, size, newTotalPrice) {
     const item = $(`.cart-item[data-item-id='${itemId}'][data-item-size='${size}']`);
-    console.log(item);
     const totalPrice = item.find('.subtotal');
-    console.log(totalPrice);
-    console.log(newTotalPrice);
     totalPrice.html(newTotalPrice);
 }
 
@@ -42,7 +39,6 @@ async function changeItemQuantity(productId, size, newValue) {
         .then(response => {
             const data = response.data;
             changeCartTotalPrice(data.cart_total);
-            console.log(data)
             changeItemTotalPrice(productId, size, data.item_total);
             toastr.success(data.text);
         })

@@ -12,7 +12,7 @@
 
 
 {% block content %}
-    <div class="container-fluid px-1 px-sm-2 px-md-5 " style="margin-top: 6rem">
+    <div class="container-fluid px-5 " style="margin-top: 6rem">
         <div class="row">
             <div class="col-12 col-md-4">
                 <div class="sp-wrap">
@@ -38,6 +38,15 @@
                     <h1 class="secondary-font display-4 color-grey60">{{ target.name }}</h1>
                 </div>
                 <div>
+                    <span class="font-main-narrow color-grey60 h2-responsive {% if target.prev_price %}main-color{% endif %}">
+                        {{ target.price }} руб
+                    </span>
+                    {% if target.prev_price %}
+                        <span class="color-grey50 font-main-light h5-responsive">{{ target.prev_price }} руб.</span>
+                    {% endif %}
+
+                </div>
+                <div>
                     <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Состав:</span>
                     <span class="font-size-m font-main-light color-grey60 text-uppercase">{{ target.material }}</span>
                 </div>
@@ -47,12 +56,12 @@
                 </div>
                 <div>
                     {% if target.available %}
-                        <div class="d-flex mb-3">
+                        <div class="d-flex my-3">
                             {% for size in target.sizes.all %}
                                 <button class="size{% if forloop.counter == 1 %} chosen{% endif %} mr-1">{{ size.name }}</button>
                             {% endfor %}
 
-                            <select name="quantity" id="quantity-select">
+                            <select name="quantity" id="quantity-select" class="ml-2">
                                 <option value="1" class="quantity-option">1</option>
                                 <option value="2" class="quantity-option">2</option>
                                 <option value="3" class="quantity-option">3</option>
@@ -70,24 +79,27 @@
                     {% endif %}
                 </div>
 
-                <div class="mt-3">
+                <div class="mx-0 mt-3">
                     {% if target.available %}
-                        <button id="add-to-cart" onclick="addItemToCart(event, {{ target.id }});
+                        <button onclick="$('#buy-quick-product').modal('toggle')"
+                            class="btn btn-light font-main-narrow z-depth-0 color-grey50 font-size-m text-uppercase color-hover-grey60 ml-0"
+                            >Купить в 1 клик
+                        </button>
+
+                        <button id="add-to-cart" onclick="addItemToCart(event, {{ target.id }});"
                                 {#ym(56194840, 'reachGoal', 'add_basket'); return true; #}
-                                " class="ml-0 btn btn-light font-main-narrow z-depth-0 color-grey60 font-size-m text-uppercase hover-main-color">
+                                class="btn btn-dark font-main-narrow z-depth-0 ml-0">
                             В корзину
                         </button>
                         <a href="{% url 'cart:cart' %}"
-                           class="d-none btn btn-light font-main-narrow z-depth-0 color-grey60 font-size-m text-uppercase"
+                           class="d-none btn btn-light font-main-narrow z-depth-0 color-grey50 font-size-m text-uppercase color-hover-grey60"
                            id="go-to-cart"
                         >
-                            Перейти в корзину
+                            <span class="color-grey50 font-main-light font-size-m">Перейти в корзину</span>
                         </a>
-                        <button onclick="$('#buy-quick-product').modal('toggle')"
-                        class="btn light-bg font-main-narrow z-depth-0 color-grey50 font-size-m text-uppercase color-hover-grey60"
-                        >Купить в 1 клик</button>
+
                     {% else %}
-                        <button class="ml-0 btn btn-light font-main-narrow z-depth-0 color-grey60 font-size-m text-uppercase hover-main-color"
+                        <button class="ml-0 btn btn-dark font-main-narrow z-depth-0 ml-0"
                             onclick="$('#buy-quick-product').modal('toggle')"
                         >Заказать пошив</button>
                     {% endif %}

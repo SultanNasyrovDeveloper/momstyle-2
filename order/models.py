@@ -75,7 +75,7 @@ class Order(models.Model):
     def get_total_price(self):
         return sum([
             item.get_total_price() for item in self.items.all()
-        ]) + self.delivery.price
+        ]) + self.delivery.delivery_method.price
 
 
 class OrderPersonalInformation(models.Model):

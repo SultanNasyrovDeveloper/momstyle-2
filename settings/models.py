@@ -73,7 +73,17 @@ class SiteMain(models.Model):
 class SocialLink(models.Model):
     name = models.CharField(max_length=50,)
     active = models.BooleanField(default=False, verbose_name='Доступна')
-    link = models.CharField(max_length=250, verbose_name='Ссылка или номер', default='')
+    show_in_navbar = models.BooleanField(default=False, verbose_name='Отображается в шапке')
+    link = models.CharField(
+        max_length=250, verbose_name='Ссылка или номер', default='', null=True, blank=True,
+    )
+
+    class Meta:
+        verbose_name = 'Ссылки на соц сети'
+        verbose_name_plural = 'Ссылки на соц сети'
+
+    def __str__(self):
+        return self.name
 
 
 

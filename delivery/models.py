@@ -14,3 +14,13 @@ class DeliveryMethod(models.Model):
         return f'{self.name} ({self.price or "Бесплатно"})'
 
 
+class DeliveryPartners(models.Model):
+    name = models.CharField(max_length=250, verbose_name='Название')
+    logo = models.FileField(upload_to='delivery_partners', verbose_name='Логотип')
+
+    class Meta:
+        verbose_name = 'Партнер доставки'
+        verbose_name_plural = 'Партнеры доставки'
+
+    def __str__(self):
+        return self.name

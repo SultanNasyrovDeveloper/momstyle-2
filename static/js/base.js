@@ -11,10 +11,10 @@ toastr.options.closeEasing = 'swing';
 
 
 function darkenNavbar () {
-    TweenMax.to(nav, 1, {backgroundColor: '#808080'})
+    TweenMax.to(nav, 1, {backgroundColor: '#212121'});
 }
 function lightenNavbar () {
-    TweenMax.to(nav, 1, {backgroundColor: 'transparent'})
+    TweenMax.to(nav, 1, {backgroundColor: 'transparent'});
 }
 function activateNavbarColorChanger() {
     if (document.documentElement.scrollTop || document.body.scrollTop > window.innerHeight) darkenNavbar();
@@ -30,13 +30,11 @@ function activateNavbarColorChanger() {
 function changeCartItemsNumber (newItemsNumber) {
     $('.cart-items-number').text(newItemsNumber);
 }
-function changeFavoritesItemsNumber (newItemsNumber) {
-    $('.favorites-items-number').text(newItemsNumber)
-}
+
 
 $(document).ready(function () {
     $("#id_phone_number").mask("+7 (999) 99 9999");
-
+    $('.current-year').html(new Date().getFullYear() );
     const card = $('.product-card');
 
     card.mouseenter(function cardMouseEnter() {
@@ -63,17 +61,16 @@ $(document).ready(function () {
                 toastr.success(response.data.text);
                 if (response.data.status === 200) {
                     target.addClass('main-color');
-                    target.removeClass('color-grey60 hover-main-color');
+                    target.removeClass('color-grey50 hover-main-color');
                 } else {
                     target.removeClass('main-color');
-                    target.addClass('color-grey60 hover-main-color');
+                    target.addClass('color-grey50 hover-main-color');
                 }
             })
             .catch(error => {
                 toastr.error('При добавлении товара в избранное произошла ошибка.')
             })
     });
-
     $('.remove_favorite').on('click', function(event) {
         event.preventDefault();
         const productId = $(this).attr('data-product-id');
@@ -89,5 +86,14 @@ $(document).ready(function () {
             .catch(error => {
                 toastr.error('При добавлении товара в избранное произошла ошибка.')
             })
-    })
+    });
+
+    $('.btn-up').on('click', function () {
+        window.scroll({
+              top: 0,
+              left: 0,
+              behavior: 'smooth'
+            });
+    });
+
 });

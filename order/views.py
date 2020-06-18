@@ -7,7 +7,7 @@ from session_object.service import SessionObjectService
 from payment.models import PaymentMethod
 from delivery.models import DeliveryMethod
 
-from . import forms
+from . import forms, models
 from .utils import get_payment_url
 
 
@@ -25,6 +25,8 @@ class OrderPersonalInfoCheckoutView(generic.View):
 
     def get_context_data(self, request):
         service = SessionObjectService('order')
+        cart_service = SessionObjectService('cart')
+        cart = cart_service.get_or_create(request)
         order_data = service.get_or_create(request)
         initial = {
             'first_name': order_data.get('first_name', None),
@@ -38,6 +40,7 @@ class OrderPersonalInfoCheckoutView(generic.View):
             'seo': seo,
             'form': form,
             'order': order_data,
+            'cart': cart_service.serialize(cart)
         }
         return context
 
@@ -68,6 +71,8 @@ class OrderDeliveryCheckoutView(generic.View):
     def get_context_data(self, request):
         service = SessionObjectService('order')
         order_data = service.get_or_create(request)
+        cart_service = SessionObjectService('cart')
+        cart = cart_service.get_or_create(request)
         initial = {
             'delivery_method': order_data.get('delivery_method', None),
             'index': order_data.get('index', None),
@@ -81,7 +86,8 @@ class OrderDeliveryCheckoutView(generic.View):
         form = forms.OrderDeliveryForm(initial=initial)
         context = {
             'seo': seo,
-            'form': form
+            'form': form,
+            'cart': cart_service.serialize(cart)
         }
         return context
 
@@ -124,7 +130,8 @@ class OrderPaymentCheckoutView(generic.View):
             'form': form,
             'order': order_data,
             'delivery_method': delivery_method,
-            'order_total_price': cart.get_total_price() + delivery_method.price
+            'order_total_price': cart.get_total_price() + delivery_method.price,
+            'cart': cart_service.serialize(cart)
 
         }
         return context
@@ -165,7 +172,8 @@ class OrderCheckoutView(generic.View):
             'order': order,
             'payment_method': PaymentMethod.objects.get(id=order.get('payment_method')),
             'delivery_method': delivery_method,
-            'order_total_price': cart.get_total_price() + delivery_method.price
+            'order_total_price': cart.get_total_price() + delivery_method.price,
+            'cart': cart_service.serialize(cart)
         }
         return context
 
@@ -194,5 +202,7 @@ class OrderCheckoutView(generic.View):
             return render(request, 'checkout.html', context)
 
 
-class CheckoutCompleteView(generic.TemplateView):
+class CheckoutCompleteView(generic.DetailView):
+    queryset = models.Order.objects.all()
     template_name = 'checkout_complete.html'
+    context_object_name = 'order'

@@ -9,7 +9,7 @@
             </div><!-- end image caption container -->
         </div><!-- end product-image-container -->
         <div class="card-body py-2 d-flex flex-column justify-content-center light-bg">
-            <span class="color-grey50 font-main-light font-size-xs text-center">
+            <span class="color-grey50 font-main-light font-size-s text-center">
                 {% if product.available %}
                     в наличии
                 {% else %}
@@ -31,18 +31,22 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center border-0 light-bg p-0">
-            <a href="{{ product.get_absolute_url }}" class="btn btn-light px-3 py-2 z-depth-0 font-main-narrow color-grey60 hover-main-color h4-responsive">
-                В корзину
+            <a href="{{ product.get_absolute_url }}" class="btn btn-light px-3 py-2 z-depth-0 font-main-narrow color-grey50 color-hover-grey60">
+                {% if product.available %}
+                    В корзину
+                {% else %}
+                    Заказать
+                {% endif %}
             </a>
 
             {% if is_favorites %}
-                <button class="remove_favorite btn btn-light px-2 py-2 z-depth-0 color-grey60 hover-main-color"
+                <button class="remove_favorite btn btn-light px-2 py-2 z-depth-0 color-grey50 color-hover-dark"
                     data-product-id="{{ product.id }}"
                 >
                     <i class="fas fa-trash"></i>
                 </button>
             {% else %}
-                 <button class="favorite_btn btn btn-light px-2 py-2 z-depth-0 {% if product.id in favorites %} main-color {% else %} color-grey60 hover-main-color{% endif %}"
+                 <button class="favorite_btn btn btn-light px-3 py-2 z-depth-0 {% if product.id in favorites %} main-color {% else %} color-grey50 hover-main-color{% endif %}"
                     data-product-id="{{ product.id }}"
                 >
                     <i class="fas fa-heart"></i>

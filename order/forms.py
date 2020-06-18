@@ -57,9 +57,10 @@ class OrderPaymentMethodForm(forms.Form):
 
 
 class OrderForm(forms.ModelForm):
+
     class Meta:
         model = models.Order
-        exclude = ('created', )
+        exclude = ('created', 'comment')
 
     def clean(self):
         data = super().clean()

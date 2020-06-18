@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banner, SiteMain, DeliveryPaymentInfo
+from .models import Banner, SiteMain, DeliveryPaymentInfo, SocialLink
 
 
 @admin.register(Banner)
@@ -21,3 +21,13 @@ class SiteMainAdmin(admin.ModelAdmin):
 @admin.register(DeliveryPaymentInfo)
 class DeliveryPaymentInfoAdmin(admin.ModelAdmin):
     list_display = ['title', 'type']
+
+
+@admin.register(SocialLink)
+class SocialLinkAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+

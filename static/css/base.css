@@ -1,17 +1,15 @@
-
-
+html{
+    scroll-behavior: smooth;
+}
 
 .cart-items-number{
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
 }
-
 .icon-small{
     font-size: 20px !important;
 }
-
-
 .order-form{
     display: flex;
     flex-direction: column;
@@ -21,7 +19,6 @@
     padding: 2rem 4rem;
     background-color: #D3D3D3;
 }
-
 .form-title{
     font-family: 'Main narrow', sans-serif;
     font-size: 1.2rem;
@@ -31,7 +28,6 @@
 
     color: rgba(0, 0, 0, 0.8);
 }
-
 .order-form>input{
     margin: 0.5rem;
     padding: 0.3rem;
@@ -41,7 +37,6 @@
 
     border-radius: 3px;
 }
-
 .make-order{
     padding: 0.5rem 1rem;
     margin-top: 2rem;
@@ -62,10 +57,13 @@
     background-color: rgba(0, 0, 0, 0.45);
     color: white;
 }
-
 .make-order:hover{
     background-color: rgba(0, 0, 0, 0.60);
     color: white;
+}
+
+.navbar-link-hover:hover{
+    color: #e1e1e1 !important;
 }
 
 
@@ -79,7 +77,6 @@
 
     overflow: hidden;
 }
-
 .image-caption{
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
@@ -93,137 +90,6 @@
 
     background-color: rgba(0, 0, 0, 0.3);
 }
-
-/*.image-caption span{*/
-    /*font-family: "Main light", sans-serif;*/
-    /*font-size: 0.8rem;*/
-
-    /*color: white;*/
-/*}*/
-
-
-
-/*!*footer*!*/
-/*.footer{*/
-    /*display: grid;*/
-    /*grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));*/
-    /*grid-gap: 1rem;*/
-
-    /*padding: 3rem;*/
-    /*margin-top: 30vh;*/
-
-    /*background-color: rgba(0, 0, 0, 0.51);*/
-    /*color: white;*/
-/*}*/
-
-/*.contacts-column{*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: start;*/
-
-/*}*/
-
-/*.column-header{*/
-    /*font-family: 'Main narrow', sans-serif;*/
-    /*font-size: 1.1rem;*/
-    /*letter-spacing: 0.045rem;*/
-    /*text-transform: uppercase;*/
-    /*line-height: 3rem;*/
-
-    /*color: #acacac;*/
-/*}*/
-
-/*.footer-icon {*/
-    /*height: 16px;*/
-/*}*/
-
-/*.contact-line{*/
-    /*font-family: 'Main light', sans-serif;*/
-    /*font-size: 0.8rem;*/
-    /*letter-spacing: 0.045rem;*/
-    /*text-transform: uppercase;*/
-    /*line-height: 1.6rem;*/
-
-    /*color: #ebebeb;*/
-/*}*/
-
-/*.links-column{*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: start;*/
-/*}*/
-
-/*.footer-link{*/
-    /*font-family: 'Main light', sans-serif;*/
-    /*font-size: 0.8rem;*/
-    /*letter-spacing: 0.045rem;*/
-    /*text-transform: uppercase;*/
-    /*line-height: 1.6rem;*/
-
-    /*color: #ebebeb;*/
-/*}*/
-
-/*.footer-link:hover{*/
-    /*color: #f5f5f5;*/
-/*}*/
-
-/*.contact-us-column{*/
-
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: start;*/
-/*}*/
-
-/*.contact-us{*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-/*}*/
-
-/*.contact-us input{*/
-    /*margin: 0.3rem 0;*/
-    /*padding: 0.5rem;*/
-    /*width: 10rem;*/
-    /*height: 2rem;*/
-
-    /*font-family: 'Main light', sans-serif;*/
-    /*font-size: 0.8rem;*/
-    /*text-transform: uppercase;*/
-    /*letter-spacing: 0.04rem;*/
-
-    /*border: none;*/
-    /*border-radius: 3px;*/
-
-    /*color: rgba(0, 0, 0, 0.50);*/
-/*}*/
-
-/*.contact-us-btn{*/
-    /*margin: 0.3rem 0;*/
-
-    /*width: 10rem;*/
-    /*height: 2rem;*/
-
-    /*cursor: pointer;*/
-
-    /*font-family: 'Main narrow', sans-serif;*/
-    /*font-size: 0.8rem;*/
-    /*text-transform: uppercase;*/
-    /*letter-spacing: 0.04rem;*/
-
-    /*border: none;*/
-    /*border-radius: 3px;*/
-
-    /*color: rgba(0, 0, 0, 0.6);*/
-/*}*/
-
-/*.up-btn-container{*/
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-/*}*/
-
 .up{
     padding: 1rem;
 
@@ -237,17 +103,17 @@
 
     background-color: rgba(0, 0, 0, 0.31);
 }
-
 .up img{
     height: 32px;
 }
-
-/*@media (max-width: 600px) {*/
-    /*footer{*/
-        /*padding: 1rem;*/
-    /*}*/
-/*}*/
-
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
 
 
 

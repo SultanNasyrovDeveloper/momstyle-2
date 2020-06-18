@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from settings.models import Banner, DeliveryPaymentInfo
+from delivery.models import DeliveryPartners
 from seo.models import SitePageSeo
 from order.forms import QuickBuyForm
 from order.models import OrderItem
@@ -79,7 +80,8 @@ class Delivery(generic.View):
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
         context = {
             'info': DeliveryPaymentInfo.objects.all(),
-            'seo': seo
+            'seo': seo,
+            'partners': DeliveryPartners.objects.all()
         }
         return render(request, 'delivery.html', context)
 

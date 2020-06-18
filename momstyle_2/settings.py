@@ -67,6 +67,7 @@ TEMPLATES = [
                 'cart.context_processors.cart_items_number',
                 'favorites.context_processors.favorites_items_number',
                 'settings.context_processor.main',
+                'settings.context_processor.social_links',
             ],
         },
     },

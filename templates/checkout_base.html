@@ -9,24 +9,22 @@
 
 {% block content %}
     <div class="container-fluid px-5" style="margin-top: 6rem">
-        <div>Оформление заказа</div>
+        <div class="h1-responsive font-main-narrow color-grey60 mb-4">Оформление заказа</div>
         <div class="container-fluid p-0 m-0">
             <div class="col-12">
                 <div class="container-fluid p-0">
                     <div class="row">
                         <div class="col-3 p-0 pr-1">
-                            <a class="d-flex tab rounded text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
-                                   font-main-narrow font-size-s color-grey50 color-hover-grey60 pointer
-                                    text-decoration-none"
+                            <a class="btn btn-light text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
+                                   font-main-narrow font-size-s color-grey50 pointer text-decoration-none"
                                  id="tab-1" href="{% url 'order:personal_info' %}"
                                 >
                                 <i class="fas fa-user mr-2"></i>Контактная информация
                             </a>
                         </div>
                         <div class="col-3 p-0 pr-1">
-                            <a class="d-flex tab rounded text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
-                                   font-main-narrow font-size-s color-grey50 color-hover-grey60 pointer
-                                    text-decoration-none"
+                            <a class="btn btn-light text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
+                                   font-main-narrow font-size-s color-grey50 pointer text-decoration-none"
                                  id="tab-2" href="{% url 'order:delivery' %}"
                             >
                                 <i class="fas fa-truck mr-2"></i>
@@ -34,9 +32,8 @@
                             </a>
                         </div>
                         <div class="col-3 p-0 pr-1">
-                            <a class="d-flex tab rounded text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
-                                   font-main-narrow font-size-s color-grey50 color-hover-grey60 pointer
-                                    text-decoration-none"
+                            <a class="btn btn-light text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
+                                   font-main-narrow font-size-s color-grey50 pointer text-decoration-none"
                                  id="tab-3" href="{% url 'order:payment' %}"
                             >
                                 <i class="fas fa-credit-card mr-2"></i>
@@ -44,9 +41,8 @@
                             </a>
                         </div>
                         <div class="col-3 p-0 pr-1">
-                            <a class="d-flex tab rounded text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
-                                   font-main-narrow font-size-s color-grey50 color-hover-grey60 pointer
-                                    text-decoration-none" href="{% url 'order:checkout' %}"
+                            <a class="btn btn-light text-uppercase light-bg m-0 px-2 py-3 z-depth-0 w-100 h-100
+                                   font-main-narrow font-size-s color-grey50 pointer text-decoration-none" href="{% url 'order:checkout' %}"
                                  id="tab-4"
                             >
                                 <i class="fas fa-money-check mr-2"></i>
@@ -65,16 +61,45 @@
                         {% endblock %}
                     </div>
                     <div class="col-4">
-                        <div class="card z-depth-0 light-bg">
-                            <div class="py-3">Итого</div>
-                            <div class="py-3">Товары: {{ cart_total_price }}руб</div>
+                        <div class="card light-bg z-depth-0" id="overall-container">
+                            <div class="card-body">
+                                <span class="h2-responsive font-main-narrow color-grey60">Ваша корзина</span>
+                                <hr/>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-main-narrow font-size-m text-uppercase color-grey60">Товары</span>
+                                        <span class="font-main-narrow font-size-m color-grey50">{{ cart.total_price }} руб.</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="font-main-narrow font-size-m text-uppercase color-grey60">Доставка</span>
+                                        <span class="font-main-narrow font-size-m color-grey50">
+                                            {% if delivery_method %}
+                                                {{ delivery_method.price }} руб.
+                                            {% else %}
+                                                Не указано
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                <hr/>
+                                <div class="my-5 d-flex justify-content-between">
+                                    <span class="font-main-narrow h4-responsive color-grey50">Общая стоимость</span>
+                                    <span class="font-main-narrow color-grey50 h4-responsive">
+                                        <span id="total-price">
+                                            {% if order_total_price %}
+                                                {{ order_total_price }}
+                                            {% else %}
+                                                {{ cart.total_price }}
+                                            {% endif %}
+                                        </span> руб.
+                                    </span>
+                                </div>
 
-                            <div class="py-3">Доставка: {% if delivery_method %}{{ delivery_method.price }}руб{% else %}Не указано{% endif %}</div>
-                            <div class="py-3">Всего: {% if order_total_price %}{{ order_total_price }}{% else %}{{ cart_total_price }}{% endif %}руб</div>
-                            <hr/>
-                            {% block next_button %}
-                                <button>Далее</button>
-                            {% endblock %}
+                                <hr/>
+
+                                <div class="d-flex justify-content-end">
+                                    {% block next_button %}
+                                    {% endblock %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

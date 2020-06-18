@@ -28,13 +28,13 @@
 {#            trackLinks:true,#}
 {#            accurateTrackBounce:true,#}
 {#            webvisor:true#}
-{#       });#}
 {#    </script>#}
 {#    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>#}
 
     <!-- bootstrap 4 css -->
     <script src="{% static 'plugins/vue.js' %}"></script>
     <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
+{#       });#}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'plugins/mdb.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/toasrt.min.css' %}">
@@ -72,76 +72,134 @@
     {% endblock %}
 </head>
 
-
+<!-- BODY -->
 <body class="d-flex flex-column min-vh-100">
 
+    <!-- NAVBAR -->
     <nav class="navbar navbar-dark navbar-expand-md bg-faded justify-content-center fixed-top py-0
-                px-1 px-sm-2 px-md-5 z-depth-0"
-    >
+                px-1 px-sm-2 px-md-5 z-depth-0">
+
+        <!-- NAVBAR BRAND -->
         <a href="{% url 'index' %}" class="navbar-brand d-flex w-50 mr-auto">
             {% if main.logo %}
                 <img src="{{ main.logo.url }}" alt="Логотип сайта Momstyle shop" height="50">
             {% else %}
                 Momstyle
             {% endif %}
-        </a>
+        </a><!-- /NAVBAR BRAND -->
+
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar-toggle-content"
                 aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- NAVBAR LINKS -->
         <div class="navbar-collapse collapse w-100 pb-2 pb-md-0" id="navbar-toggle-content">
             <ul class="navbar-nav w-100 justify-content-center">
                 <li>
-                    <a href="{% url 'index' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Главная</a>
+                    <a href="{% url 'index' %}"
+                       class="font-main-narrow text-white text-uppercase mx-2 font-size-s navbar-link-hover">
+                        Главная
+                    </a>
                 </li>
                 <li>
-                    <a href="{% url 'product_list' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Каталог</a>
+                    <a href="{% url 'product_list' %}"
+                       class="font-main-narrow text-white text-uppercase mx-2 font-size-s navbar-link-hover">
+                        Каталог
+                    </a>
                 </li>
                 <li>
-                    <a href="{% url 'delivery' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Доставка</a>
+                    <a href="{% url 'delivery' %}"
+                       class="font-main-narrow text-white text-uppercase mx-2 font-size-s navbar-link-hover">
+                        Доставка
+                    </a>
                 </li>
                 <li>
-                    <a href="{% url 'about' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s nowrap">О нас</a>
+                    <a href="{% url 'about' %}"
+                       class="font-main-narrow text-white text-uppercase mx-2 font-size-s navbar-link-hover">
+                        О нас
+                    </a>
                 </li>
                 <li>
-                    <a href="{% url 'favorites:favorites' %}" class="font-main-light text-white text-uppercase mx-2 font-size-s">Избранное</a>
+                    <a href="{% url 'favorites:favorites' %}"
+                       class="font-main-narrow text-white text-uppercase mx-2 font-size-s navbar-link-hover">
+                        Избранное
+                    </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav w-100 ml-auto justify-content-end">
-                <li class="nav-item d-flex align-items-center">
+
+                <li class="nav-item d-flex align-items-center ml-1 ml-md-0 my-3 my-md-0">
+                    {% for link in social_links %}
+                        {% if link.show_in_navbar and link.name == 'instagram' %}
+                            <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if link.show_in_navbar and link.name == 'vk' %}
+                            <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-vk"></i></a>
+                        {% endif %}
+                        {% if link.show_in_navbar and link.name == 'whatsapp' %}
+                            <a href="https://wa.me/{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-whatsapp"></i></a>
+                        {% endif %}
+                        {% if link.show_in_navbar and link.name == 'telegram' %}
+                            <a href="https://telegram.me/{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-telegram"></i></a>
+                        {% endif %}
+                        {% if link.show_in_navbar and link.name == 'viber' %}
+                            <a href="viber://add?number={{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-viber"></i></a>
+                        {% endif %}
+                        {% if link.show_in_navbar and link.name == 'facebook' %}
+                            <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-facebook"></i></a>
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+                <li class="nav-item d-flex align-items-center ml-md-3 ml-2">
                     <a href="{% url 'cart:cart' %}" class="d-flex h-100">
                         <!-- cart icon -->
-                        <i class="fas fa-shopping-cart text-white align-self-center"></i>
+                        <i class="fas fa-shopping-cart text-white align-self-center navbar-link-hover"></i>
                         <span class="cart-items-number align-self-start d-flex justify-content-center
                                     align-items-center main-color-bg font-main-light font-size-s text-white ml-1"
                         >
                             {{ cart_items_number }}
                         </span>
                     </a>
-
                 </li>
             </ul>
-        </div>
-    </nav>
-
+        </div><!-- /NAVBAR LINKS -->
+    </nav><!-- /NAVBAR -->
     {% block content %}
 
     {% endblock %}
 
-    <footer class="page-footer mt-5 mt-auto">
-
-        <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left px-1 px-sm-2 px-md-5 dark-bg2">
-
-            <!-- Grid row -->
+    <!-- FOOTER -->
+    <footer class="page-footer mt-auto">
+        <div class="container-fluid text-center text-md-left px-1 px-sm-2 px-md-5" style="background-color: #252525;">
             <div class="row">
 
-                <div class="col-12 d-flex justify-content-center py-3">
-                    Icons
+                <div class="col-12 d-flex justify-content-center py-3 border-light border-bottom">
+                    {% for link in social_links %}
+                        {% if link.name == 'instagram' %}
+                            <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if link.name == 'vk' %}
+                            <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-vk"></i></a>
+                        {% endif %}
+                        {% if link.name == 'whatsapp' %}
+                            <a href="https://wa.me/{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-whatsapp"></i></a>
+                        {% endif %}
+                        {% if link.name == 'telegram' %}
+                            <a href="https://telegram.me/{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-telegram"></i></a>
+                        {% endif %}
+                        {% if link.name == 'viber' %}
+                            <a href="viber://add?number={{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-viber"></i></a>
+                        {% endif %}
+                        {% if link.name == 'facebook' %}
+                            <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-facebook"></i></a>
+                        {% endif %}
+                    {% endfor %}
                 </div>
 
                 <!-- Grid column -->
-                <div class="col-md-3 py-3 d-flex flex-column">
+                <div class="col-md-3 py-5 d-flex flex-column">
                     <span class="font-main-narrow font-size-m text-uppercase my-2">Контакты:</span>
                     <div class="font-main-light font-size-m"><i class="fas fa-mobile-alt mr-2"></i>{{ main.phone_number }}</div><!-- end phone line -->
                     <div class="font-main-light font-size-m"><i class="fas fa-envelope mr-2"></i>{{ main.email }}</div><!-- end phone line -->
@@ -154,7 +212,7 @@
                 <!-- Grid column -->
 
                 <!-- Grid column -->
-                <div class="col-md-3 py-3 d-flex flex-column">
+                <div class="col-md-3 py-5 d-flex flex-column">
                     <span  class="font-main-narrow font-size-m text-uppercase my-2">Ссылки:</span>
                     <a href="{% url 'index' %}" class="font-main-light font-size-m">- Главная</a>
                     <a href="{% url 'product_list' %}" class="font-main-light font-size-m">- Каталог</a>
@@ -163,7 +221,7 @@
                     <a href="{% url 'favorites:favorites' %}" class="font-main-light font-size-m">- Избранное</a>
                 </div>
 
-                <div class="col-md-3 py-3 d-flex flex-column">
+                <div class="col-md-3 py-5 d-flex flex-column">
                     <span class="font-main-narrow font-size-m text-uppercase my-2">Организация:</span>
                     <span class="font-main-light font-size-m">{{ main.organisation_line1 }}</span>
                     <span class="font-main-light font-size-m">{{ main.organisation_line2 }}</span>
@@ -171,24 +229,24 @@
                     <span class="font-main-light font-size-m">{{ main.organisation_line4 }}</span>
                 </div>
 
-                <div class="col-md-3 py-3">
-                    <div class="up rounded-circle">
+                <div class="col-md-3 py-5 d-flex justify-content-center align-items-center">
+                    <a class="btn btn-circle btn-light btn-xl d-flex justify-content-center align-items-center btn-up">
                     <!-- up button -->
-                        <i class="material-icons text-white">arrow_circle_up</i>
-                    </div><!-- end up button -->
+                        <i class="fas fa-arrow-up text-dark"></i>
+                    </a><!-- end up button -->
                 </div>
 
             </div>
             <!-- Grid row -->
         </div>
-        <div class="footer-copyright dark-bg text-center py-3">© <span class="current-year"></span> Copyright: ИП. Юшков</div>
-    </footer>
+        <div class="footer-copyright bg-dark text-center py-3">© <span class="current-year"></span> Copyright {{ main.organisation_line1 }}</div>
+    </footer><!-- FOOTER -->
 
     <div class="modal fade" id="buy-quick-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Форма заказа</h5>
+                    <h5 class="modal-title font-main-narrow h4-responsive color-grey60">Оформить заказ</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -200,24 +258,23 @@
                     {% endblock %}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light font-main-narrow font-size-m z-depth-0 color-grey60" data-dismiss="modal">Закрыть</button>
                     <input type="submit" form="quick-buy-form"
-                           class="btn bg-light color-grey60 hover-main-color z-depth-0 font-size-m font-main-narrow">
+                           class="btn bg-dark font-size-m font-main-narrow text-white z-depth-0">
                 </div>
             </div>
         </div>
     </div>
 
+    
     <script src="{% static 'plugins/jquery.js' %}"></script>
     <script src="{% static 'plugins/gsap/TweenMax.min.js' %}"></script>
-    <script src="{% static 'plugins/gsap/plugins/ScrollToPlugin.min.js' %}"></script>
     <script src="{% static 'plugins/masked input/jquery.maskedinput.js' %}"></script>
     <script src="{% static 'plugins/popper.min.js' %}"></script>
     <script src="{% static 'plugins/boostrap.min.js' %}"></script>
     <script src="{% static 'plugins/mdb.min.js' %}"></script>
     <script src="{% static 'plugins/axios.min.js' %}"></script>
     <script src="{% static 'plugins/toastr.min.js' %}"></script>
-
     <script src="{% static 'js/base.js' %}"></script>
 
 

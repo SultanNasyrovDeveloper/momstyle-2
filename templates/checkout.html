@@ -4,15 +4,33 @@
 
 {% block checkout_content %}
     <div>
-        <div class=""><span>Имя:</span> <span>{{ order.first_name }}</span></div>
-        <div class=""><span>Фамилия:</span> <span>{{ order.second_name }}</span></div>
-        <div class=""><span>Номер телефона:</span> <span>{{ order.phone_number }}</span></div>
-        <div class=""><span>Электронная почта:</span> <span>{{ order.email }}</span></div>
-        <div class=""><span>Способ доставки:</span> <span>{{ delivery_method.name }}</span></div>
-        <div class=""><span>Способ оплаты:</span> <span>{{ payment_method.name }}</span></div>
         <div class="">
-            <span>Адрес:</span>
-            <span>{{ order.index }} {{ order.city }}, {{ order.street }}, {{ order.building_number }} {% if order.apartment %}кв. {{ order.apartment }}{% endif %}</span>
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Имя:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ order.first_name }}</span>
+        </div>
+        <div class="">
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Фамилия:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ order.second_name }}</span>
+        </div>
+        <div class="">
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Номер телефона:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ order.phone_number }}</span>
+        </div>
+        <div class="">
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Электронная почта:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ order.email }}</span>
+        </div>
+        <div class="">
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Способ доставки:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ delivery_method.name }}</span>
+        </div>
+        <div class="">
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Способ оплаты:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ payment_method.name }}</span>
+        </div>
+        <div class="">
+            <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Адрес:</span>
+            <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ order.index }} {{ order.city }}, {{ order.street }}, {{ order.building_number }} {% if order.apartment %}кв. {{ order.apartment }}{% endif %}</span>
         </div>
 
     </div>
@@ -47,9 +65,9 @@
 
 {% block next_button %}
     {% if order.payment_method == 1 %}
-        <input type="submit" value="К оплате" form="checkout-form">
+        <input type="submit" form="checkout-form" class="btn btn-dark z-depth-0 font-main-narrow font-size-m" value="Далее">
     {% else %}
-        <button>Оформить</button>
+        <input type="submit" form="checkout-form" class="btn btn-dark z-depth-0 font-main-narrow font-size-m" value="Оформить">
     {% endif %}
 {% endblock %}
 

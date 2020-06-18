@@ -39,15 +39,22 @@ body{
     color: rgba(0, 0, 0, 0.6);
 }
 .color-hover-grey60:hover{
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .hover-main-color-bg:hover{
     background-color: #ed7e7c!important;
     color: white;
 }
+.btn-hover-dark:hover{
+    background-color: #212121!important;
+    color: white!important;
+}
 .hover-main-color:hover{
     color: #ed7e7c !important;
+}
+.hover-color-dark:hover{
+    color: #212121!important
 }
 .main-color-bg{
     background-color: #ed7e7c;
@@ -55,13 +62,8 @@ body{
 .light-bg{
     background-color: rgba(0, 0, 0, 0.03);
 }
-.dark-bg{
-    background-color: #808080 !important;
-}
 
-.dark-bg2{
-    background-color: #8b8b8b !important;
-}
+
 
 .font-size-s{
     font-size: 0.7rem;
@@ -74,6 +76,7 @@ body{
 .font-size-l {
     font-size: 1rem;
 }
+
 
 
 .small{

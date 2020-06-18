@@ -18,7 +18,7 @@
                     <div class="card cart-items z-depth-0">
                         <div class="card-body">
                             <div>
-                                <h1 class="secondary-font font-size-xxl color-grey60">{{ seo.h1 }}</h1>
+                                <h1 class="secondary-font h1-responsive color-grey60">{{ seo.h1 }}</h1>
                             </div>
                             {% for item in cart.items %}
                                 <div class="container-fluid light-bg my-1 p-2 cart-item"
@@ -27,17 +27,18 @@
                                     <div class="row">
                                         <!-- cart item instance -->
                                         <div class="col-6 col-sm-4">
-                                            <a href="{% url 'product_detail' item.product.id %}" class="name">
+                                            <a href="{% url 'product_detail' item.product.id %}"
+                                               class="font-main-narrow font-size-m color-grey60 text-uppercase">
                                                 {{ item.product.name }}
                                             </a>
                                         </div>
                                         <div class="col-6 col-sm-4 col-md-1">
-                                            <span class="size">{{ item.size }}</span>
+                                            <span class="badge badge-pill badge-light z-depth-0 font-main-narrow font-size-s color-grey60">
+                                                {{ item.size }}
+                                            </span>
                                         </div>
                                         <div class="col-6 col-sm-4 col-md-2">
-                                            <span class="help-text price-text">
-                                                <span class="price">{{ item.product.price }}</span> руб.
-                                            </span>
+                                            <span class="font-main-narrow font-size-m color-grey60">{{ item.product.price }} руб.</span>
                                         </div>
                                         <div class="col-6 col-sm-4 col-md-1">
                                             <select onchange="changeItemQuantity({{ item.product_id }}, '{{ item.size }}', value)">
@@ -49,14 +50,15 @@
                                             </select>
                                         </div>
                                         <div class="col-6 col-sm-4 col-md-2">
-                                            <span class="help-text">
+                                            <span class="font-main-narrow font-size-m color-grey60">
                                                 <span class="subtotal">{{ item.total_price }}</span> руб.
                                             </span>
                                         </div>
                                         <div class="col-6 col-sm-4 col-md-2">
-                                            <button onclick="deleteItem(event, {{ item.product.id }}, '{{ item.size }}')">
+                                            <a onclick="deleteItem(event, {{ item.product.id }}, '{{ item.size }}')"
+                                               class="font-main-light font-size-m text-uppercase color-grey60">
                                                 удалить
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div><!-- end cart item instance -->
@@ -74,16 +76,27 @@
                     <div class="col-12 col-md-4 p-2">
                         <div class="card light-bg z-depth-0" id="overall-container">
                             <div class="card-body">
-                                <div></div>
-                                <div class="d-flex justify-content-center">Итого:</div>
-                                <div id="total-price">{{ cart.total_price }} руб.</div>
+                                <span class="h2-responsive font-main-narrow color-grey60">Ваша корзина</span>
+
                                 <hr/>
-                                <a class="color-grey60 btn light-bg font-size-m font-main-narrow z-depth-0"
+                                <div class="my-5 d-flex justify-content-between">
+                                    <span class="font-main-narrow h4-responsive color-grey50">Общая стоимость</span>
+                                    <span class="font-main-narrow color-grey50 h4-responsive">
+                                        <span id="total-price">
+                                            {{ cart.total_price }}
+                                        </span> руб.
+                                    </span>
+                                </div>
+
+                                <hr/>
+                                <button onclick="$('#buy-quick-product').modal('toggle')"
+                                    class="font-size-m font-main-narrow color-grey60 btn btn-light z-depth-0"
+                                    >Купить в 1 клик</button>
+                                <a class="btn btn-dark font-size-m font-main-narrow z-depth-0"
                                     href="{% url 'order:redirect' %}"
                                 >
                                     Оформить заказ
                                 </a>
-                                <button onclick="$('#buy-quick-product').modal('toggle')">Купить в 1 клик</button>
                             </div>
                         </div>
                     </div>

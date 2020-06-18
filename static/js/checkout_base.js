@@ -6,7 +6,7 @@ function setCurrentTab (number) {
         previous --;
     }
     let next = number + 1;
-    while (next < 4) {
+    while (next < 5) {
         $('#tab-' + next).addClass('disabled_tab');
         next ++;
     }

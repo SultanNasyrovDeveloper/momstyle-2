@@ -27,8 +27,12 @@
                              <div class="col-12 col-sm-6 col-md-3 col-lg-12 my-3">
                                  <span class="d-flex font-size-m font-main-narrow color-grey60 text-uppercase my-2">Цена</span>
                                  <div class="d-flex mb-3">
-                                     <input type="text" id="id_price_0" class="form-control mr-1">
-                                     <input type="text" id="id_price_1" class="form-control ml-1">
+                                     <div class="d-flex mb-3">
+
+
+                                         <input type="text" name="price_min" id="id_price_0" class="form-control" value="{{ filter.form.data.price_min }}">
+                                         <input type="text" name="price_max" id="id_price_1" class="form-control" value="{{ filter.form.data.price_max }}">
+                                    </div>
                                  </div>
                                  <div class="middle w-100">
                                     <div class="multi-range-slider">

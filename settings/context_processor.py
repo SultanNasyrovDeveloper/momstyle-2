@@ -1,4 +1,4 @@
-from .models import SiteMain
+from .models import SiteMain, SocialLink
 
 
 def main(request):
@@ -7,3 +7,7 @@ def main(request):
     else:
         main = {}
     return {'main': main}
+
+
+def social_links(request):
+    return {'social_links': SocialLink.objects.filter(active=True)}
