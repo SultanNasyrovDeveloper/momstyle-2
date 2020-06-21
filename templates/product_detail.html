@@ -54,9 +54,9 @@
                     <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Рост модели:</span>
                     <span class="font-size-m font-main-light color-grey60 text-uppercase">{{ target.models_height }} см</span>
                 </div>
-                <div>
+                <div class="my-3">
                     {% if target.available %}
-                        <div class="d-flex my-3">
+                        <div class="d-flex">
                             {% for size in target.sizes.all %}
                                 <button class="size{% if forloop.counter == 1 %} chosen{% endif %} mr-1">{{ size.name }}</button>
                             {% endfor %}
@@ -74,6 +74,9 @@
                                 <option value="10" class="quantity-option">10</option>
                             </select>
                         </div><!-- end size buttons container -->
+                        <span type="button" class="font-size-s font-main-light color-grey60" data-toggle="modal" data-target="#sizes-table">
+                            таблица размеров
+                        </span>
                     {% else %}
                         Данного товара нет в наличии.
                     {% endif %}
@@ -95,7 +98,7 @@
                            class="d-none btn btn-light font-main-narrow z-depth-0 color-grey50 font-size-m text-uppercase color-hover-grey60"
                            id="go-to-cart"
                         >
-                            <span class="color-grey50 font-main-light font-size-m">Перейти в корзину</span>
+                            Перейти в корзину
                         </a>
 
                     {% else %}
@@ -127,25 +130,26 @@
         </div>
     </div>
 
-    <section class="sizes-table-layout">
-        <!-- sizes table layout -->
+    <div class="modal fade" id="sizes-table" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-        <div class="sizes-content-container">
-            <!-- sizes content container -->
+                    {% if main.sizes_table %}
+                        <img class="img-fluid" src="{{ main.sizes_table.url }}" alt="" class="img-fluid">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <span class="close">x</span>
 
-            <div class="table-image">
-                <!--  -->
 
-                {% if main.sizes_table %}
-                    <img class="img-fluid" src="{{ main.sizes_table.url }}" alt="">
-                {% endif %}
-
-            </div><!-- end  -->
-        </div><!-- end sizes content container -->
-
-    </section><!-- end sizes table layout -->
 
 {% endblock %}
 

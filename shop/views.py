@@ -68,7 +68,7 @@ class ProductQuickBuyView(generic.View):
             OrderItem.objects.create(
                 order=order, product_id=product.id, product_name=product.name,
             )
-            return redirect(reverse_lazy('order:complete'))
+            return redirect(reverse_lazy('order:complete', args=(order.id, )))
         else:
             return redirect(product.get_absolute_url())
 

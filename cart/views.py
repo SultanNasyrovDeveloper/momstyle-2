@@ -32,7 +32,7 @@ class CartView(generic.View):
             service = SessionObjectService('cart')
             session_cart = service.get_or_create(request)
             order.parse_session_cart(session_cart)
-            return redirect(reverse_lazy('order:complete'))
+            return redirect(reverse_lazy('order:complete', args=(order.id, )))
         else:
             return redirect('cart')
 

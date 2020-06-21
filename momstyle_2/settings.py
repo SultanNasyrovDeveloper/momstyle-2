@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'momstyle_2.wsgi.application'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "momstyle.shop.manager@yandex.ru"
-EMAIL_HOST_PASSWORD = "o7LaLjIZLBWFt5uNfUUO"
+EMAIL_HOST_USER = "momstyle-shop@yandex.ru"
+EMAIL_HOST_PASSWORD = "MBvjhbruygre8buybfj"
 EMAIL_USE_SSL = True
 
 

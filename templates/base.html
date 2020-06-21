@@ -17,24 +17,24 @@
 
     {% endblock %}
 
-{#    <!-- Yandex.Metrika counter -->#}
-{#    <script type="text/javascript" >#}
-{#       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};#}
-{#       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})#}
-{#       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");#}
-{##}
-{#       ym(56194840, "init", {#}
-{#            clickmap:true,#}
-{#            trackLinks:true,#}
-{#            accurateTrackBounce:true,#}
-{#            webvisor:true#}
-{#    </script>#}
-{#    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>#}
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(56194840, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/56194840" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
     <!-- bootstrap 4 css -->
-    <script src="{% static 'plugins/vue.js' %}"></script>
     <link rel="stylesheet" href="{% static 'plugins/bootstrap.min.css' %}">
-{#       });#}
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'plugins/mdb.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/toasrt.min.css' %}">
@@ -111,7 +111,7 @@
                 <li>
                     <a href="{% url 'delivery' %}"
                        class="font-main-narrow text-white text-uppercase mx-2 font-size-s navbar-link-hover">
-                        Доставка
+                        Доставка и оплата
                     </a>
                 </li>
                 <li>

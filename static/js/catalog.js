@@ -1,5 +1,7 @@
+darkenNavbar();
+
 $(document).ready(function () {
-    darkenNavbar();
+
     function setInitialSliderValues () {
         const leftPrice = $('#left_price');
         const rightPrice = $('#right_price');

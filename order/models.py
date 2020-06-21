@@ -1,6 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from utils import notify_admin
 
 
 class OrderItem(models.Model):
@@ -120,3 +121,10 @@ def create_payment_and_delivery(sender, created,  **kwargs):
         OrderPersonalInformation.objects.create(order=order)
         OrderDeliveryInformation.objects.create(order=order)
         OrderPaymentInformation.objects.create(order=order)
+        notify_admin(
+            'Создан новый заказ.',
+            (
+                f'{order.created.strftime("%d %B %Yг. %H:%M")} был создан новый заказ {order.id}.\n '
+                f'https://momstyle.ru/admin/order/order/{order.id}'
+            )
+        )

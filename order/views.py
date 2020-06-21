@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, Http404, HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
 
+from utils import notify_admin
 from seo.models import SitePageSeo
 from session_object.service import SessionObjectService
 from payment.models import PaymentMethod
@@ -9,6 +10,7 @@ from delivery.models import DeliveryMethod
 
 from . import forms, models
 from .utils import get_payment_url
+from .order_incomplete_message import OrderIncompleteMessage
 
 
 def redirect_to_form(request):
@@ -206,3 +208,19 @@ class CheckoutCompleteView(generic.DetailView):
     queryset = models.Order.objects.all()
     template_name = 'checkout_complete.html'
     context_object_name = 'order'
+
+
+def order_incomplete(request):
+    if request.method == 'POST':
+        cart_service = SessionObjectService('cart')
+        order_service = SessionObjectService('order')
+        cart = cart_service.get_or_create(request)
+        order = order_service.get_or_create(request)
+        message = OrderIncompleteMessage(cart, order)
+        notify_admin(
+            'Незаполненная форма заказа.',
+            message.render()
+        )
+        return HttpResponse({})
+    else:
+        raise Http404('Order incomplete')

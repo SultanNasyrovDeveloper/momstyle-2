@@ -12,4 +12,5 @@ urlpatterns = [
     path('checkout', views.OrderCheckoutView.as_view(), name='checkout'),
     path('checkout/redirect', views.redirect_to_form, name='redirect'),
     path('<int:pk>/checkout/complete', views.CheckoutCompleteView.as_view(), name='complete'),
+    path('incomplete', views.order_incomplete)
 ]
