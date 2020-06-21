@@ -7,13 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{{ seo.title }}</title>
-    <meta name="description" content="{{ seo.description }}">
-    <meta name="keywords" content="{{ seo.keywords }}">
-
-    {{ seo.additional|safe }}
-
     {% block meta %}
+        <title>{{ seo.title }}</title>
+        <meta name="description" content="{{ seo.description }}">
+        <meta name="keywords" content="{{ seo.keywords }}">
+
+        {{ seo.additional|safe }}
 
     {% endblock %}
 
@@ -201,7 +200,9 @@
                 <!-- Grid column -->
                 <div class="col-md-3 py-5 d-flex flex-column">
                     <span class="font-main-narrow font-size-m text-uppercase my-2">Контакты:</span>
-                    <div class="font-main-light font-size-m"><i class="fas fa-mobile-alt mr-2"></i>{{ main.phone_number }}</div><!-- end phone line -->
+                    {% for phone_number in main.phone_numbers %}
+                        <div class="font-main-light font-size-m"><i class="fas fa-mobile-alt mr-2"></i>{{ phone_number }}</div><!-- end phone line -->
+                    {% endfor %}
                     <div class="font-main-light font-size-m"><i class="fas fa-envelope mr-2"></i>{{ main.email }}</div><!-- end phone line -->
                     {% for address in main.addresses %}
                         <div class="font-main-light font-size-m"><i class="fas fa-map-marker-alt mr-2"></i>{{ address }}</div><!-- end phone line -->

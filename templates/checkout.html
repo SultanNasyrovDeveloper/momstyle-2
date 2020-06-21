@@ -32,31 +32,29 @@
             <span class="font-size-m font-main-narrow color-grey60 text-uppercase">Адрес:</span>
             <span class="font-size-m font-main-narrow color-grey50 text-uppercase">{{ order.index }} {{ order.city }}, {{ order.street }}, {{ order.building_number }} {% if order.apartment %}кв. {{ order.apartment }}{% endif %}</span>
         </div>
-
     </div>
+
+    <span class="font-main-light font-size-m color-grey50 d-flex my-4 text-uppercase">
+        Проверьте, пожалуйста, введенные данные. Если все верно, выберите способ подтверждения.
+    </span>
     <form method="post" id="checkout-form">
         {% csrf_token %}
 
-        <div class="form-group">
-            <label class="font-size-l font-main-light">{{ form.comment.label }}</label>
-            {{ form.comment }}
-            <small class="text-danger">{{ form.comment.errors }}</small>
-        </div>
-
         <small class="text-danger">{{ form.non_field_errors }}</small>
         <div class="form-group checkbox-container">
-            <label class="font-size-l font-main-light">{{ form.connect_by_phone.label }}</label>
             {{ form.connect_by_phone }}
+            <label class="font-size-l font-main-light ml-2">«Я хочу, чтобы менеджер связался со мной по телефону для подтверждения заказа»</label>
+
             <small class="text-danger">{{ form.connect_by_phone.errors }}</small>
         </div>
         <div class="form-group checkbox-container">
-            <label class="font-size-l font-main-light">{{ form.connect_by_whatsapp.label }}</label>
             {{ form.connect_by_whatsapp }}
+            <label class="font-size-l font-main-light ml-2">«Я хочу, чтобы менеджер связался со мной через WhatsApp для подтверждения заказа»</label>
             <small class="text-danger">{{ form.connect_by_whatsapp.errors }}</small>
         </div>
         <div class="form-group checkbox-container">
-            <label class="font-size-l font-main-light">{{ form.no_connect.label }}</label>
             {{ form.no_connect }}
+            <label class="font-size-l font-main-light ml-2">«Я уверен(а) в своем заказе, подтверждать не нужно»</label>
             <small class="text-danger">{{ form.no_connect.errors }}</small>
         </div>
 

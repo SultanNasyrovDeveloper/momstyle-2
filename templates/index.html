@@ -93,7 +93,7 @@
                         {% for category in categories %}
                             <div class="col-12 col-sm-6 col-md-3 p-2">
                                <div class="card border-0 z-depth-0 product-card">
-                                   <a href="">
+                                   <a href="{% url 'product_list' %}?category={{ category.id }}">
                                        <div class="image-container">
                                             <!-- image container -->
                                            <img class="img-fluid main-img" src="{{ category.image.url }}" alt="">
@@ -102,10 +102,10 @@
                                                <span class="text-white font-main-light font-size-m">Перейти >></span>
                                            </div><!-- end image caption container -->
                                        </div><!-- end image container -->
+                                       <div class="card-body py-3 d-flex flex-column justify-content-center">
+                                           <span class="color-grey60 font-main-narrow text-uppercase text-center">{{ category.name }}</span>
+                                       </div>
                                    </a>
-                                   <div class="card-body py-3 d-flex flex-column justify-content-center">
-                                       <span class="color-grey60 font-main-narrow text-uppercase text-center">{{ category.name }}</span>
-                                   </div>
                                </div>
                             </div>
                         {% endfor %}

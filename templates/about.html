@@ -19,10 +19,10 @@
                 <div class="row">
                     <div class="col-6 d-flex flex-column justify-content-center justify-content-center align-self-center">
                         <div class="h3-responsive font-main-narrow text-uppercase color-grey60 text-center my-2">{{ page_block.title }}</div>
-                        <div class="text-center font-main-narrow font-size-m color-grey50">{{ page_block.text }}</div>
+                        <div class="text-center font-main-narrow font-size-m color-grey50">{{ page_block.text|safe }}</div>
                     </div>
                     <div class="col-6 m-0">
-                        <div class="fotorama">
+                        <div class="fotorama" data-loop="true" data-autoplay="3500">
                             {% for image in page_block.images.all %}
                                 <img src="{{ image.file.url }}" alt="">
                             {% endfor %}

@@ -11,7 +11,8 @@ class DeliveryMethod(models.Model):
         verbose_name_plural = 'Способы доставки'
 
     def __str__(self):
-        return f'{self.name} ({self.price or "Бесплатно"})'
+        price = f'{self.price} руб.' if self.price else "Бесплатно"
+        return f'{self.name} ({price})'
 
 
 class DeliveryPartners(models.Model):

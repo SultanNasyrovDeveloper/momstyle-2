@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block meta %}
+    <title>{{ target.name }} - {{ seo.title }}</title>
+    <meta name="description" content="{{ target.name }} - {{ seo.description }}">
+    <meta name="keywords" content="{{ seo.keywords }}">
+
+    {{ seo.additional|safe }}
+{% endblock %}
+
 
 {% block css %}
     <!-- product_detail.css -->

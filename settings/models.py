@@ -44,7 +44,7 @@ class SiteMain(models.Model):
     product_h2 = models.CharField(max_length=100, null=True, blank=True, verbose_name='Название блока продукты')
     product_par = models.CharField(max_length=300, null=True, blank=True, verbose_name='Описание блока продукты')
 
-    phone_number = models.CharField(max_length=20, verbose_name='Номер телефона', null=True, blank=True)
+    phone_number = models.CharField(max_length=150, verbose_name='Номер телефона', null=True, blank=True)
     email = models.EmailField(null=True, blank=True, verbose_name='Электронный адрес')
     address = models.CharField(max_length=500, null=True, blank=True, verbose_name='Адрес (через запятую)')
     working_hours = models.CharField(max_length=100, null=True, blank=True, verbose_name='Часы работы')
@@ -68,6 +68,10 @@ class SiteMain(models.Model):
     def addresses(self):
         if self.address:
             return self.address.split(', ')
+
+    def phone_numbers(self):
+        if self.phone_number:
+            return self.phone_number.split(', ')
 
 
 class SocialLink(models.Model):
