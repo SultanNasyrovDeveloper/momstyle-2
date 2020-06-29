@@ -23,17 +23,15 @@
     <div class="container-fluid px-5 " style="margin-top: 6rem">
         <div class="row">
             <div class="col-12 col-md-4">
-                <div class="sp-wrap">
+                <div class="sp-wrap w-100">
                     <!-- smooth product plugin wrapper -->
-
                     {% for object in target.images.all %}
                         <a href="{{ object.file.url }}">
-                            <img src="{{ object.file.url }}" alt="">
+                            <img src="{{ object.file.url }}" alt="" class="img-fluid">
                         </a>
                     {% endfor %}
                 </div><!-- end smooth product plugin wrapper -->
             </div>
-
             <div class="col-12 col-md-8">
                 <div>
                     {% for category in target.category.all %}
@@ -123,8 +121,8 @@
         </div>
     </div>
 
-    <div class="container-fluid px-1 px-sm-2 px-md-5 py-3">
-        <div class="d-flex">
+    <div class="container-fluid px-1 px-sm-2 px-md-5 py-5">
+        <div class="d-flex py-5">
             <h2 class="secondary-font h2 color-grey60">Вам также может понравится</h2>
         </div>
         <div class="row d-flex justify-content-center">

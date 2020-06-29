@@ -3,7 +3,6 @@ import json
 from django.views import generic
 from django.shortcuts import render, Http404, HttpResponse, redirect
 from django.urls import reverse_lazy
-from django.core.mail import send_mail
 from django.http import JsonResponse
 
 from seo.models import SitePageSeo

@@ -79,7 +79,7 @@
                 px-1 px-sm-2 px-md-5 z-depth-0">
 
         <!-- NAVBAR BRAND -->
-        <a href="{% url 'index' %}" class="navbar-brand d-flex w-50 mr-auto">
+        <a href="{% url 'index' %}" class="navbar-brand d-flex w-50 mr-auto py-0">
             {% if main.logo %}
                 <img src="{{ main.logo.url }}" alt="Логотип сайта Momstyle shop" height="50">
             {% else %}
@@ -174,7 +174,7 @@
         <div class="container-fluid text-center text-md-left px-1 px-sm-2 px-md-5" style="background-color: #252525;">
             <div class="row">
 
-                <div class="col-12 d-flex justify-content-center py-3 border-light border-bottom">
+                <div class="col-12 d-flex justify-content-center py-4 border-light border-bottom">
                     {% for link in social_links %}
                         {% if link.name == 'instagram' %}
                             <a href="{{ link.link }}" class="mx-1 text-white navbar-link-hover"><i class="fab fa-instagram"></i></a>
@@ -240,7 +240,7 @@
             </div>
             <!-- Grid row -->
         </div>
-        <div class="footer-copyright bg-dark text-center py-3">© <span class="current-year"></span> Copyright {{ main.organisation_line1 }}</div>
+        <div class="footer-copyright bg-dark text-center py-3 font-main-light">© <span class="current-year"></span> Copyright {{ main.organisation_line1 }}</div>
     </footer><!-- FOOTER -->
 
     <div class="modal fade" id="buy-quick-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

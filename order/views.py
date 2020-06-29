@@ -37,7 +37,7 @@ class OrderPersonalInfoCheckoutView(generic.View):
             'phone_number': order_data.get('phone_number', None),
         }
         seo, _ = SitePageSeo.objects.get_or_create(page_name=self.page_name)
-        form = forms.OrderPersonalInformationForm(initial=initial)
+        form = forms.OrderPersonalInformationForm(initial=initial, )
         context = {
             'seo': seo,
             'form': form,

@@ -25,6 +25,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
 
+    confirmed = models.BooleanField('Подтвержден', default=False)
     fast_buy = models.BooleanField('В 1 клик', default=False,)
 
     no_connect = models.BooleanField('Без обратной связи', default=False, blank=True,)

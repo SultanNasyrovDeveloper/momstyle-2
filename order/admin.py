@@ -25,6 +25,7 @@ class OrderDeliveryInformationInline(admin.StackedInline):
 class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ('total_price', )
     inlines = (
+        OrderPersonalInfoInline,
         OrderPaymentInformationInline,
         OrderDeliveryInformationInline,
         OrderPaymentInformationInline,
