@@ -197,7 +197,7 @@ class OrderCheckoutView(generic.View):
             cart_service.new(request)
             if created_order.payment.payment_method_id == 1:
                 return redirect(get_payment_url(created_order.id, created_order.get_total_price()))
-            return redirect(reverse_lazy('order:complete'))
+            return redirect(reverse_lazy('order:complete', args=(created_order.id, )))
         else:
             context = self.get_context_data(request)
             context['form'] = form
