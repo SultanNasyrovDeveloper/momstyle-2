@@ -33,7 +33,7 @@ function changeCartItemsNumber (newItemsNumber) {
 
 
 $(document).ready(function () {
-    $("#id_phone_number").mask("+7 (999) 99 9999");
+    $("#id_phone_number").mask("+7 (999) 999 99 99");
     $('.current-year').html(new Date().getFullYear() );
     const card = $('.product-card');
 
